@@ -14,6 +14,25 @@ from OpenGL.GL import *
 from OpenGL.GLU import *
 
 
+cube_pieces = (
+    (-2.95, -2.95, 2.95),
+    (-2.95, -1.025, 2.95),
+    (-1.025, -1.025, 2.95),
+    (-1.025, -2.95, 2.95),
+    (-2.95, -2.95, 1.025),
+    (-2.95, -1.025, 1.025),
+    (-1.025, -1.025, 1.025),
+    (-1.025, -2.95, 1.025)
+)
+
+def cube():
+    glBegin(GL_LINES)
+    glColor3fv((0.5, 0.5, 0.5))
+    for edge in cube_edges:
+        for vertex in edge:
+            glVertex3fv(cube_pieces[vertex])
+    glEnd()
+
 def main():
     pygame.init()
     display = (800, 600)

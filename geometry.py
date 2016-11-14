@@ -1,6 +1,6 @@
-from quat import *
-from OpenGL.GL import *
 
+from OpenGL.GL import *
+import time
 axis_verts = (
     (-7.5, 0.0, 0.0),
     (7.5, 0.0, 0.0),
@@ -102,6 +102,17 @@ cube_stickers = (
     (2.95, -2.95, 3.01)
 )
 
+cube_pieces = (
+    (-2.95, -2.95, 2.95),
+    (-2.95, -1.025, 2.95),
+    (-1.025, -1.025, 2.95),
+    (-1.025, -2.95, 2.95),
+    (-2.95, -2.95, 1.025),
+    (-2.95, -1.025, 1.025),
+    (-1.025, -1.025, 1.025),
+    (-1.025, -2.95, 1.025)
+)
+
 cube_edges = (
     (0, 1),
     (0, 3),
@@ -137,12 +148,12 @@ up_face = (
 )
 
 cube_surfaces = (
-    (0, 1, 2, 3),  # Front
-    (3, 2, 6, 7),  # Right
-    (7, 6, 5, 4),  # Back
-    (4, 5, 1, 0),  # Left
-    (1, 5, 6, 2),  # Top
-    (4, 0, 3, 7)  # Bottom
+    [0, 1, 2, 3],  # Front
+    [3, 2, 6, 7],  # Right
+    [7, 6, 5, 4],  # Back
+    [4, 5, 1, 0],  # Left
+    [1, 5, 6, 2],  # Top
+    [4, 0, 3, 7]  # Bottom
 )
 
 cube_colors = (
@@ -155,6 +166,19 @@ cube_colors = (
 )
 
 
+def rotate_y_cw():
+    # trans = [1.0, 1.0, -1.0]
+    # print(cube_pieces*trans)
+    glRotated(time.time() % (1.0) / 1 * -360, 1, 0, 0)
+    glColor3f(0.5, 0.5, 1.0)
+    glBegin(GL_QUADS)
+    glVertex3f(-1.0, 1.0, 0.0)
+    glVertex3f(1.0, 1.0, 0.0)
+    glVertex3f(1.0, -1.0, 0.0)
+    glVertex3f(-1.0, -1.0, 0.0)
+    glEnd()
+
+
 def axis():
     glBegin(GL_LINES)
     for color, axis in zip(axis_colors, axes):
@@ -164,14 +188,15 @@ def axis():
     glEnd()
 
 
-def drawFace():
+def draw_stickers():
     glBegin(GL_QUADS)
     for v in range(len(cube_stickers)):
         glVertex3fv(cube_stickers[v])
     glEnd()
 
 
-def rotateFace(inc_x, inc_y, accum, zoom):
+def drawFace():
+
     glBegin(GL_LINES)
     glColor3fv((0.5, 0.5, 0.5))
     for edge in cube_edges:
@@ -195,37 +220,40 @@ def cube():
         for vertex in surface:
             glVertex3fv(cube_verts[vertex])
     glEnd()
+    #
 
     # White
     glColor3fv((1.0, 1.0, 1.0))
-    drawFace()
+    draw_stickers()
     glRotate(90, 1, 0, 0)
     # Blue
     glColor3fv((0.0, 0.318, 0.729))
-    drawFace()
+    draw_stickers()
     glRotate(90, 1, 0, 0)
     # Yellow
     glColor3fv((1.0, 0.835, 0.0))
-    drawFace()
+    draw_stickers()
     glRotate(90, 1, 0, 0)
     # Green
     glColor3fv((0.0, 0.62, 0.376))
-    drawFace()
+    draw_stickers()
     glRotate(90, 0, 1, 0)
     # Orange
     glColor3fv((1.0, 0.345, 0.0))
-    drawFace()
+    draw_stickers()
     glRotate(180, 0, 1, 0)
     # Red
     glColor3fv((0.8, 0.118, 0.118))
-    drawFace()
-
+    draw_stickers()
     glBegin(GL_LINES)
     glColor3fv((0.5, 0.5, 0.5))
-    # for edge in cube_edges:
-    #     for vertex in edge:
-    #         glVertex3fv(cube_verts[vertex])
     for edge in cube_edges:
         for vertex in edge:
-            glVertex3fv(up_face[vertex])
+            glVertex3fv(cube_verts[vertex])
+    for edge in cube_edges:
+        for vertex in edge:
+            glVertex3fv(cube_pieces[vertex])
+    # for edge in cube_edges:
+    #     for vertex in edge:
+    #         glVertex3fv(up_face[vertex])
     glEnd()
