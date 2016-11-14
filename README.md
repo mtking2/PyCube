@@ -10,8 +10,8 @@ a neural network algorithm, that will teach itself to solve a Rubik's Cube (PyCu
 
 ### Dependencies
 
-This program utilizes the following Python modules:
-[OpenGL](https://www.opengl.org/)
+This program utilizes the following Python modules:  
+[OpenGL](https://www.opengl.org/)  
 [Pygame](http://pygame.org/)
 
 ### Notable Mentions
