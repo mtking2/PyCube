@@ -31,17 +31,30 @@
             padding-top: 5px;
             padding-left: 5px;
         }
-        .navbar {
-            background: rgba(245, 245, 245, 0.1);
+        /*.navbar {
+            background: rgba(198, 198, 198, 0.3);
             border: 0 !important;
         }
         .well, .well-sm {
-            background: rgba(245, 245, 245, 0.2);
-            border: 0 !important;
+            background: rgba(198, 198, 198, 0.8);
+            border: 0 !important
+        }*/
+        a {
+            color: rgb(0, 173, 237);
+        }
+        .page-header, hr {
+            border-color: rgb(220, 220, 220);
+        }
+        code {
+            font-family: monospace;
+            color: black;
+            background: white;
         }
 
         body {
-          background: url(../mtking2.github.io/images/Roan.jpg) no-repeat center center fixed;
+          /*background: url(../mtking2.github.io/images/Roan.jpg) no-repeat center center fixed;
+          color: rgb(224, 224, 224);*/
+          background-color: rgb(220, 220, 220);
           -webkit-background-size: cover;
           -moz-background-size: cover;
           -o-background-size: cover;
@@ -116,23 +129,9 @@
                       <i class="fa fa-github fa-lg" aria-hidden="true"></i>
                       See the repo on GitHub <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                     </a>
-                    <br>
-                    <small style="font-size:16px">More on neural network coming in the future!</small><br>
                 </h1>
+                <small style="font-size:16px;">More on neural network coming in the future!</small><br>
                 <br>
-                <!-- First Blog Post -->
-                <h2>
-                    <strike>PyCube</strike> VPython Rubik's Cube is alive!
-                </h2>
-                <p class="lead">
-                    by <a href="../mtking2.github.io/">Michael</a>
-                </p>
-                <p><span class="glyphicon glyphicon-time"></span> Posted on May 28, 2016</p>
-                <hr>
-                <p style="font-size:16px">The first version of my Rubik's cube python program is finally alive.
-                I still need to add a few more features and make a few tweeks but here it is!</p><br>
-                <img src="resources/pycube.resized.gif" alt="PyCube Gif" width="180px"/>
-
 
 
                 <!-- Second Blog Post -->
@@ -161,8 +160,25 @@
                     </li>
                 </ul> -->
 
+              </div>
+
+              <div class="well">
+                  <!-- First Blog Post -->
+                  <h2>
+                      <strike>PyCube</strike> VPython Rubik's Cube is alive!
+                  </h2>
+                  <p class="lead">
+                      by <a href="../mtking2.github.io/">Michael</a>
+                  </p>
+                  <p><span class="glyphicon glyphicon-time"></span> Posted on May 28, 2016</p>
+                  <hr>
+                  <p style="font-size:16px">The first version of my Rubik's cube python program is finally alive.
+                  I still need to add a few more features and make a few tweeks but here it is!</p><br>
+                  <img src="resources/pycube.resized.gif" alt="PyCube Gif" width="180px"/>
+              </div>
             </div>
-            </div>
+
+
 
             <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
@@ -188,10 +204,20 @@
                   <!-- <img src="resources/pycube.gif" alt="PyCube Gif" width="100%"/><br> -->
                   <h2 id="purpose">Purpose</h3>
                   <p style="font-size:16px">This software-based Rubik's Cube will serve as a basis for a later project in which I will attempt to create another program, implementing a neural network algorithm, that will teach itself to solve a Rubik's Cube (PyCube).</p>
+
                   <h2 id="dependencies">Dependencies</h3>
                   <p style="font-size:16px">This program utilizes the following Python modules:<br>
-                  <a href="https://www.opengl.org/">OpenGL</a><br>
-                  <a href="http://pygame.org/">Pygame</a></p>
+                  <a href="http://pyopengl.sourceforge.net/">PyOpenGL</a> see also <a href="https://www.opengl.org/">OpenGL</a><br>
+                  <a href="http://pygame.org/">Pygame</a><br>
+                  <a href="http://www.numpy.org/">NumPy</a></p>
+
+                  Python 3.x :<br>
+                  <code>pip3 install pyopengl pygame numpy</code><br><br>
+
+                  <strike>Python 2.x : <br>
+                  <code>pip install pyopengl pygame numpy</code></strike><br>
+                  Only supported by Python 3.x+. Try at your own risk.
+
                   <h2 id="notable-mentions">Notable Mentions</h3>
                   <p style="font-size:16px"><a href="http://stackoverflow.com/questions/30745703/rotating-a-cube-using-quaternions-in-pyopengl">This</a> post from stackoverflow was very helpful in creating a solid starting point
                     to use quaternions to rotate a 3 dimensional cube using Python and OpenGL.</p>

@@ -11,8 +11,16 @@ a neural network algorithm, that will teach itself to solve a Rubik's Cube (PyCu
 ### Dependencies
 
 This program utilizes the following Python modules:  
-[OpenGL](https://www.opengl.org/)  
-[Pygame](http://pygame.org/)
+[PyOpenGL](pyopengl.sourceforge.net/) see also [OpenGL](https://www.opengl.org/)  
+[Pygame](http://pygame.org/)  
+[NumPy](http://www.numpy.org/)
+
+Python 3.x :  
+`pip3 install pyopengl pygame numpy`
+
+~~Python 2.x :  
+`pip install pyopengl pygame numpy`~~  
+Only supported by Python 3.x+. Try at your own risk.
 
 ### Notable Mentions
 
