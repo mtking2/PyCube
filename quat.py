@@ -54,3 +54,10 @@ def q_to_mat4(q):
          [2 * x * y + 2 * z * w, 1 - 2 * x * x - 2 * z * z, 2 * y * z - 2 * x * w, 0],
          [2 * x * z - 2 * y * w, 2 * y * z + 2 * x * w, 1 - 2 * x * x - 2 * y * y, 0],
          [0, 0, 0, 1]], 'f')
+
+
+def x_rot(v, theta):
+    rx = [[1, 0, 0],
+          [0, cos(theta), -sin(theta)],
+          [0, sin(theta), cos(theta)]]
+    return numpy.dot(rx, v).tolist()
