@@ -2,6 +2,10 @@
 
 PyCube is an 3D interactive Rubik's Cube using OpenGL and Pygame.
 
+Here's a .gif showing the progress as of 11/16/16.
+
+<img src="resources/pycube_cpcs.gif" width="500">
+
 ### Purpose
 This software-based Rubik's Cube will serve as a basis for a later
 project in which I will attempt to create another program, implementing

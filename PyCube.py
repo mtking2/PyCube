@@ -220,7 +220,7 @@ def main():
 
         draw_cube()
         # drawFace()
-        axis()
+        # axis()
         pygame.display.flip()
         # pygame.time.wait(1)
 
