@@ -13,47 +13,6 @@ from pygame.locals import *
 from OpenGL.GL import *
 from OpenGL.GLU import *
 
-'''
-    5____________6
-    /           /|
-   /           / |
- 1/__________2/  |
- |           |   |
- |           |   |
- |           |   7
- |           |  /
- |           | /
- 0___________3/
-'''
-
-cube_pieces = [
-    [-3, -3, 3],
-    [-3, -1, 3],
-    [-1, -1, 3],
-    [-1, -3, 3],
-    [-3, -3, 1],
-    [-3, -1, 1],
-    [-1, -1, 1],
-    [-1, -3, 1],
-    [-3, -3, 1],
-    [-3, -1, 1],
-    [-1, -1, 1],
-    [-1, -3, 1],
-    [-3, -3, -1],
-    [-3, -1, -1],
-    [-1, -1, -1],
-    [-1, -3, -1]
-]
-
-
-def cube():
-    glBegin(GL_LINES)
-    glColor3fv((0.5, 0.5, 0.5))
-    for edge in cube_edges:
-        for vertex in edge:
-            glVertex3fv(cube_pieces[vertex])
-    glEnd()
-
 
 def main():
     pygame.init()
@@ -80,32 +39,6 @@ def main():
     accum = (1, 0, 0, 0)
     zoom = 1
 
-    def update():
-        pygame.mouse.get_rel()  # prevents the cube from instantly rotating to a newly clicked mouse coordinate
-
-        rot_x = normalize(axisangle_to_q((1.0, 0.0, 0.0), inc_x))
-        rot_y = normalize(axisangle_to_q((0.0, 1.0, 0.0), inc_y))
-
-        nonlocal accum
-        accum = q_mult(accum, rot_x)
-        accum = q_mult(accum, rot_y)
-        # print(accum)
-
-        glMatrixMode(GL_MODELVIEW)
-        glLoadMatrixf(q_to_mat4(accum))
-        glScalef(zoom, zoom, zoom)
-
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-
-        cube()
-        # drawFace()
-        axis()
-        pygame.display.flip()
-        # pygame.time.wait(1)
-
-    # for v in cube_pieces:
-    #     print(v)
-
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -127,15 +60,6 @@ def main():
 
                 if event.key == pygame.K_u:
                     print('up')
-                    theta = 0.13089969389957471827
-                    for x in range(12):
-                        for i in range(len(cube_pieces)):
-                            cube_pieces[i] = x_rot(cube_pieces[i], theta)
-                        print(theta)
-                        update()
-                    for v in cube_pieces:
-                        print(v)
-
 
                 # Reset to default view
                 if event.key == pygame.K_SPACE:
@@ -174,5 +98,25 @@ def main():
             inc_x = -tmp_y * pi / 450
             inc_y = -tmp_x * pi / 450
 
-        update()
+        pygame.mouse.get_rel()  # prevents the cube from instantly rotating to a newly clicked mouse coordinate
+
+        rot_x = normalize(axisangle_to_q((1.0, 0.0, 0.0), inc_x))
+        rot_y = normalize(axisangle_to_q((0.0, 1.0, 0.0), inc_y))
+
+        accum = q_mult(accum, rot_x)
+        accum = q_mult(accum, rot_y)
+
+        glMatrixMode(GL_MODELVIEW)
+        glLoadMatrixf(q_to_mat4(accum))
+        glScalef(zoom, zoom, zoom)
+
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+
+        cube()
+        # drawFace()
+        axis()
+        pygame.display.flip()
+        # pygame.time.wait(1)
+
+
 main()

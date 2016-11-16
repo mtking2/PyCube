@@ -147,11 +147,24 @@ up_face = (
     # (4, 0, 3, 7)  # Bottom
 )
 
+'''
+    5____________6
+    /           /|
+   /           / |
+ 1/__________2/  |
+ |           |   |
+ |           |   |
+ |           |   7
+ |           |  /
+ |           | /
+ 0___________3/
+'''
+
 cube_surfaces = (
     [0, 1, 2, 3],  # Front
-    [3, 2, 6, 7],  # Right
-    [7, 6, 5, 4],  # Back
     [4, 5, 1, 0],  # Left
+    [7, 6, 5, 4],  # Back
+    [3, 2, 6, 7],  # Right
     [1, 5, 6, 2],  # Top
     [4, 0, 3, 7]  # Bottom
 )
@@ -161,22 +174,10 @@ cube_colors = (
     (0.769, 0.118, 0.227),  # Red
     (1.0, 0.835, 0.0),  # Yellow
     (1.0, 0.345, 0.0),  # Orange
-    (0.0, 0.318, 0.729),  # Blue
-    (0.0, 0.62, 0.376)  # Green
+    (0.0, 0.62, 0.376),  # Green
+    (0.0, 0.318, 0.729)  # Blue
+
 )
-
-
-def rotate_y_cw():
-    # trans = [1.0, 1.0, -1.0]
-    # print(cube_pieces*trans)
-    glRotated(time.time() % (1.0) / 1 * -360, 1, 0, 0)
-    glColor3f(0.5, 0.5, 1.0)
-    glBegin(GL_QUADS)
-    glVertex3f(-1.0, 1.0, 0.0)
-    glVertex3f(1.0, 1.0, 0.0)
-    glVertex3f(1.0, -1.0, 0.0)
-    glVertex3f(-1.0, -1.0, 0.0)
-    glEnd()
 
 
 def axis():
@@ -245,6 +246,7 @@ def cube():
     # Red
     glColor3fv((0.8, 0.118, 0.118))
     draw_stickers()
+
     glBegin(GL_LINES)
     glColor3fv((0.5, 0.5, 0.5))
     for edge in cube_edges:

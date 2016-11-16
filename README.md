@@ -7,7 +7,6 @@ This software-based Rubik's Cube will serve as a basis for a later
 project in which I will attempt to create another program, implementing
 a neural network algorithm, that will teach itself to solve a Rubik's Cube (PyCube).
 
-
 ### Dependencies
 
 This program utilizes the following Python modules:  
@@ -21,6 +20,26 @@ Python 3.x :
 ~~Python 2.x :  
 `pip install pyopengl pygame numpy`~~  
 Only supported by Python 3.x+. Try at your own risk.
+
+### TODO
+
+* ~~Individual pieces~~
+* ~~Rotation Matrices~~
+* ~~90 degree rotation of individual pieces on each axis~~
+* ~~Map CW and CWW rotation to lower/upper case keys~~
+* ~~Implement all center pieces~~
+* ~~Map keys and rotation matrix calls to respective center pieces~~
+* ~~Color center pieces~~
+* Implement edge pieces
+* Implement corner pieces
+* Solve correct movement of edge/corner pieces
+    * Use face patterns to track position of edge/corner pieces
+* Color edge pieces
+* Color corner pieces
+* Test/bug fix function cube
+* Test solves with PyCube
+* Begin implementing reverse moves solver
+* ...
 
 ### Notable Mentions
 
