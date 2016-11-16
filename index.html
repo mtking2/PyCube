@@ -18,7 +18,7 @@
 </head>
 
 
-<body>
+<body data-spy="scroll">
     <!--
     <h1>Michael King</h1>
     <p>This is the default web page for this server.</p>
@@ -48,7 +48,7 @@
             <li><a href="../mtking2.github.io/coursework/">Projects & Course Work<span class="sr-only">(current)</span></a></li>
           </ul>
 
-          <div class="visible-xs-block visible-sm-block">
+          <!-- <div class="visible-xs-block visible-sm-block">
           <form class="navbar-form navbar-right" role="search"  style="border: 0 !important;">
             <div class="input-group">
                 <input type="text" class="form-control" placeholder="Search">
@@ -59,7 +59,7 @@
                 </span>
             </div>
           </form>
-          </div>
+          </div> -->
 
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
@@ -86,6 +86,7 @@
                 </h1>
                 <small style="font-size:16px;">More on neural network coming in the future!</small><br>
                 <br>
+
 
 
                 <!-- Second Blog Post -->
@@ -116,7 +117,32 @@
 
               </div>
 
-              <div class="well">
+              <div class="well" id="nov16">
+                  <!-- Second Blog Post -->
+                  <h2>
+                      PyCube is under renovation.
+                  </h2>
+                  <p class="lead">
+                      by <a href="../">Michael</a>
+                  </p>
+                  <p><span class="glyphicon glyphicon-time"></span> Posted on Nov 16, 2016</p>
+                  <hr>
+                  <p style="font-size:16px">So over the summer I shelved PyCube until I started
+                      looking into graphics with OpenGL. Seeing how the graphics can be so much
+                      better compared to VPython I decided to revisit PyCube and rebuild it
+                      from the ground up using PyOpenGL, Pygame, NumPy, and lots of quaternions and
+                      matrix math and vector management. I think I'm off to a good start. I have a
+                      semi-working Rubik's cube with only the center pieces. You use the FBLRUD keys
+                      to rotate the faces. Lowercase for CW and [Shift] for CCW. Oh, and you can click
+                      and drag with the mouse to move the cube around (can also use arrow keys) as well
+                      as zoom in and out with the mouse wheel. I'm happy with the result but there is still
+                      a lot more work to be done.
+                  </p>
+                  <br><br>
+                  <img src="resources/pycube_cpcs.gif" alt="PyCube Gif" width="100%"/>
+              </div>
+
+              <div class="well" id="may16">
                   <!-- First Blog Post -->
                   <h2>
                       <s>PyCube</s> VPython Rubik's Cube is alive!
@@ -135,6 +161,7 @@
                   <img src="resources/pycube.resized.gif" alt="PyCube Gif" width="180"/>
               </div>
 
+
             </div>
 
 
@@ -143,8 +170,8 @@
             <div class="col-md-4">
 
                 <!-- Blog Search Well -->
-                <div class="well visible-md-block visible-lg-block">
-                    <!-- <h4>Blog Search</h4> -->
+                <!-- <div class="well visible-md-block visible-lg-block">
+                    <!-- <h4>Blog Search</h4> -
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Search">
                         <span class="input-group-btn">
@@ -153,8 +180,8 @@
                         </button>
                         </span>
                     </div>
-                    <!-- /.input-group -->
-                </div>
+                    <!-- /.input-group --
+                </div> -->
 
                 <!-- Side Widget Well -->
                 <div class="well">
@@ -188,8 +215,8 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <ul class="list-unstyled">
-                                <li><a href="#">May 2016</a>
-                                </li>
+                                <li><a href="#nov16">Nov 2016</a></li>
+                                <li><a href="#may16">May 2016</a></li>
                             </ul>
                         </div>
                         <!-- /.col-lg-6 -->
