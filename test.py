@@ -101,6 +101,48 @@ up_face = (
     # (4, 0, 3, 7)  # Bottom
 )
 
+'''
+    These pattern are for each set of edge pieces and corner
+    pieces on each face. They will shift when the faces are
+    rotated so these patterns will keep track of them.
+     _______________
+    |  1 |  2 |  2 |
+    |____|____|____|
+    | 1  |    |  3 |
+    |____|____|____|
+    |  0 |  0 |  3 |
+    |____|____|____|
+
+'''
+# face_patterns = [
+#     [0, 1, 2, 3],  # 0 Front
+#     [0, 1, 2, 3],  # 1 Back
+#     [0, 1, 2, 3],  # 2 Left
+#     [0, 1, 2, 3],  # 3 Right
+#     [0, 1, 2, 3],  # 4 Up
+#     [0, 1, 2, 3],  # 5 Down
+# ]
+#
+# front_edges = [
+#     [0, 1],  # x
+#     [0, 3]   # y
+# ]
+#
+# back_edges = [
+#     [2, 3],  # x
+#     [1, 2]   # y
+# ]
+#
+# left_edges = [
+#     [0, 1],  # y
+#     [0, 1]   # z
+# ]
+#
+# right_edges = [
+#     [2, 3],  # y
+#     [2, 3]   # z
+# ]
+
 def draw_face():
 
     glBegin(GL_LINES)

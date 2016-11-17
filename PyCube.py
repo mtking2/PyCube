@@ -30,7 +30,7 @@ def main():
     # Default view
     glMatrixMode(GL_PROJECTION)
     gluPerspective(45, (display[0] / display[1]), 0.5, 40)
-    glTranslatef(0.0, 0.0, -17.5)
+    glTranslatef(0.0, 0.0, -15.0)
 
     # set initial rotation
     # glRotate(90, 1, 0, 0)
@@ -281,7 +281,7 @@ def main():
             if event.type == pygame.MOUSEBUTTONUP:
                 # Increase scale (zoom) value
                 if event.button == 5:
-                    if zoom > 0.2:
+                    if zoom > 0.3:
                         zoom -= 0.05
                         # print('scroll down', zoom)
 
@@ -297,8 +297,11 @@ def main():
 
 
 def draw_cube():
+    glLineWidth(GLfloat(4.0))
     glBegin(GL_LINES)
+    # glColor3fv((0.0, 0.0, 0.0))
     glColor3fv((0.5, 0.5, 0.5))
+
     for axis in edge_pieces:
         for piece in axis:
             for edge in cube_edges:
@@ -315,23 +318,55 @@ def draw_cube():
 def draw_stickers():
     glBegin(GL_QUADS)
     i = 0
-    for color, surface in zip(cube_colors, cube_surfaces):
-        glColor3fv(color)
-        for vertex in surface:
-            glVertex3fv(center_pieces[i][vertex])
-        j = 0
-        for piece in center_pieces:
-            glColor3fv((0, 0, 0))
-            for vertex in surface:
-                glVertex3fv(center_pieces[j][vertex])
-            j += 1
-        i += 1
+    # for color, surface in zip(cube_colors, cube_surfaces):
+    #     glColor3fv(color)
+    #     for vertex in surface:
+    #         glVertex3fv(center_pieces[i][vertex])
+    #     j = 0
+    #     for piece in center_pieces:
+    #         glColor3fv((0, 0, 0))
+    #         for vertex in surface:
+    #             glVertex3fv(center_pieces[j][vertex])
+    #         j += 1
+    #     i += 1
+
+    # Black inner sides of edge pieces
+    # glColor3fv((0, 0, 0))
+    # for piece in edge_pieces[0]:
+    #     for vertex in cube_surfaces[1]:
+    #         glVertex3fv(piece[vertex])
+    #     for vertex in cube_surfaces[3]:
+    #         glVertex3fv(piece[vertex])
+    #
+    # for piece in edge_pieces[1]:
+    #     for vertex in cube_surfaces[4]:
+    #         glVertex3fv(piece[vertex])
+    #     for vertex in cube_surfaces[5]:
+    #         glVertex3fv(piece[vertex])
+    #
+    # for piece in edge_pieces[2]:
+    #     for vertex in cube_surfaces[0]:
+    #         glVertex3fv(piece[vertex])
+    #     for vertex in cube_surfaces[2]:
+    #         glVertex3fv(piece[vertex])
+
+    # White front face
+    glColor3fv(cube_colors[0])
+    for vertex in edge_pieces[1][0]:
+            glVertex3fv(vertex)
+    for vertex in edge_pieces[1][3]:
+        glVertex3fv(vertex)
+    for vertex in edge_pieces[0][0]:
+        glVertex3fv(vertex)
+    for vertex in edge_pieces[0][1]:
+        glVertex3fv(vertex)
 
     glEnd()
 
 
 def draw_axis():
     glBegin(GL_LINES)
+
     for color, axis in zip(axis_colors, axes):
         glColor3fv(color)
         for point in axis:
