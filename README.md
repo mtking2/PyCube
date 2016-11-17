@@ -34,10 +34,11 @@ Only supported by Python 3.x+. Try at your own risk.
 * ~~Implement all center pieces~~
 * ~~Map keys and rotation matrix calls to respective center pieces~~
 * ~~Color center pieces~~
-* Implement edge pieces
+* ~~Implement edge pieces~~
 * Implement corner pieces
-* Solve correct movement of edge/corner pieces
-    * Use face patterns to track position of edge/corner pieces
+* ~~Solve correct movement of edge pieces~~
+    * ~~Use face patterns to track position of edge/corner pieces~~ FAILURE
+* ~~Solve correct movement of corner pieces~~
 * Color edge pieces
 * Color corner pieces
 * Test/bug fix function cube
