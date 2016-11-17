@@ -14,165 +14,6 @@ from pygame.locals import *
 from OpenGL.GL import *
 from OpenGL.GLU import *
 
-'''
-    5____________6
-    /           /|
-   /           / |
- 1/__________2/  |
- |           |   |
- |           |   |
- |           |   7
- |           |  /
- |           | /
- 0___________3/
-'''
-
-edge_pieces = [
-
-    # [[-3, -1, 3],
-    #  [-3, 1, 3],
-    #  [-1, 1, 3],
-    #  [-1, -1, 3],
-    #  [-3, -1, 1],
-    #  [-3, 1, 1],
-    #  [-1, 1, 1],
-    #  [-1, -1, 1]]
-
-    # [[-3, -3, 1],
-    #  [-3, -1, 1],
-    #  [-1, -1, 1],
-    #  [-1, -3, 1],
-    #  [-3, -3, -1],
-    #  [-3, -1, -1],
-    #  [-1, -1, -1],
-    #  [-1, -3, -1]]
-
-
-]
-
-center_pieces = [
-    # Front 0
-    [[-1, -1, 3],
-     [-1, 1, 3],
-     [1, 1, 3],
-     [1, -1, 3],
-     [-1, -1, 1],
-     [-1, 1, 1],
-     [1, 1, 1],
-     [1, -1, 1]],
-
-    # Left 1
-    [[-3, -1, 1],
-     [-3, 1, 1],
-     [-1, 1, 1],
-     [-1, -1, 1],
-     [-3, -1, -1],
-     [-3, 1, -1],
-     [-1, 1, -1],
-     [-1, -1, -1]],
-
-    # Back 2
-    [[-1, -1, -1],
-     [-1, 1, -1],
-     [1, 1, -1],
-     [1, -1, -1],
-     [-1, -1, -3],
-     [-1, 1, -3],
-     [1, 1, -3],
-     [1, -1, -3],
-     ],
-
-    # Right 3
-    [[1, -1, 1],
-     [1, 1, 1],
-     [3, 1, 1],
-     [3, -1, 1],
-     [1, -1, -1],
-     [1, 1, -1],
-     [3, 1, -1],
-     [3, -1, -1],
-
-     ],
-
-    # Up 3
-    [[-1, 1, 1],
-     [-1, 3, 1],
-     [1, 3, 1],
-     [1, 1, 1],
-     [-1, 1, -1],
-     [-1, 3, -1],
-     [1, 3, -1],
-     [1, 1, -1]],
-
-    # Down 4
-    [[-1, -3, 1],
-     [-1, -1, 1],
-     [1, -1, 1],
-     [1, -3, 1],
-     [-1, -3, -1],
-     [-1, -1, -1],
-     [1, -1, -1],
-     [1, -3, -1]]
-]
-
-'''
-    These pattern are for each set of edge pieces and corner
-    pieces on each face. They will shift when the faces are
-    rotated so these patterns will keep track of them.
-     _______________
-    |  1 |  2 |  2 |
-    |____|____|____|
-    | 1  |    |  3 |
-    |____|____|____|
-    |  0 |  0 |  3 |
-    |____|____|____|
-
-'''
-face_patterns = [
-    [0, 1, 2, 3],  # 0 Front
-    [0, 1, 2, 3],  # 1 Back
-    [0, 1, 2, 3],  # 2 Left
-    [0, 1, 2, 3],  # 3 Right
-    [0, 1, 2, 3],  # 4 Up
-    [0, 1, 2, 3],  # 5 Down
-]
-
-
-def draw_cube():
-    glBegin(GL_LINES)
-    glColor3fv((0.5, 0.5, 0.5))
-    for piece in edge_pieces:
-        for edge in cube_edges:
-            for vertex in edge:
-                glVertex3fv(piece[vertex])
-    for piece in center_pieces:
-        for edge in cube_edges:
-            for vertex in edge:
-                glVertex3fv(piece[vertex])
-    glEnd()
-
-    glBegin(GL_QUADS)
-    # glColor3fv((0, 0, 0))
-    # for surface in cube_surfaces:
-    #     for piece in center_pieces:
-    #         for vertex in surface:
-    #             glVertex3fv(piece[vertex])
-    i = 0
-
-    for color, surface in zip(cube_colors, cube_surfaces):
-        glColor3fv(color)
-        for vertex in surface:
-            glVertex3fv(center_pieces[i][vertex])
-        j = 0
-        for piece in center_pieces:
-            glColor3fv((0, 0, 0))
-            for vertex in surface:
-                glVertex3fv(center_pieces[j][vertex])
-            j += 1
-        i += 1
-
-    glEnd()
-
 
 def main():
     pygame.init()
@@ -219,8 +60,8 @@ def main():
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 
         draw_cube()
-        # drawFace()
-        # axis()
+        # draw_face()
+        # draw_axis()
         pygame.display.flip()
         # pygame.time.wait(1)
 
@@ -256,6 +97,11 @@ def main():
                     for x in range(12):
                         for i in range(8):
                             center_pieces[0][i] = z_rot(center_pieces[0][i], theta)
+                        for i in range(2):
+                            for j in range(8):
+                                # X & Y
+                                edge_pieces[i][front_edges[i][0]][j] = z_rot(edge_pieces[i][front_edges[i][0]][j], theta)
+                                edge_pieces[i][front_edges[i][1]][j] = z_rot(edge_pieces[i][front_edges[i][1]][j], theta)
                         update()
 
                 if event.key == pygame.K_l:
@@ -280,6 +126,11 @@ def main():
                     for x in range(12):
                         for i in range(8):
                             center_pieces[2][i] = z_rot(center_pieces[2][i], theta)
+                        for i in range(2):
+                            for j in range(8):
+                                # X & Y
+                                edge_pieces[i][back_edges[i][0]][j] = z_rot(edge_pieces[i][back_edges[i][0]][j], theta)
+                                edge_pieces[i][back_edges[i][1]][j] = z_rot(edge_pieces[i][back_edges[i][1]][j], theta)
                         update()
 
                 if event.key == pygame.K_r:
@@ -357,6 +208,49 @@ def main():
 
         update()
         sys.stdout.flush()
+
+
+def draw_cube():
+    glBegin(GL_LINES)
+    glColor3fv((0.5, 0.5, 0.5))
+    for axis in edge_pieces:
+        for piece in axis:
+            for edge in cube_edges:
+                for vertex in edge:
+                    glVertex3fv(piece[vertex])
+    for piece in center_pieces:
+        for edge in cube_edges:
+            for vertex in edge:
+                glVertex3fv(piece[vertex])
+    glEnd()
+    draw_stickers()
+
+
+def draw_stickers():
+    glBegin(GL_QUADS)
+    i = 0
+    for color, surface in zip(cube_colors, cube_surfaces):
+        glColor3fv(color)
+        for vertex in surface:
+            glVertex3fv(center_pieces[i][vertex])
+        j = 0
+        for piece in center_pieces:
+            glColor3fv((0, 0, 0))
+            for vertex in surface:
+                glVertex3fv(center_pieces[j][vertex])
+            j += 1
+        i += 1
+
+    glEnd()
+
+
+def draw_axis():
+    glBegin(GL_LINES)
+    for color, axis in zip(axis_colors, axes):
+        glColor3fv(color)
+        for point in axis:
+            glVertex3fv(axis_verts[point])
+    glEnd()
 
 
 main()
