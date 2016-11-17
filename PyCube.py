@@ -97,11 +97,23 @@ def main():
                     for x in range(12):
                         for i in range(8):
                             center_pieces[0][i] = z_rot(center_pieces[0][i], theta)
-                        for i in range(2):
-                            for j in range(8):
-                                # X & Y
-                                edge_pieces[i][front_edges[i][0]][j] = z_rot(edge_pieces[i][front_edges[i][0]][j], theta)
-                                edge_pieces[i][front_edges[i][1]][j] = z_rot(edge_pieces[i][front_edges[i][1]][j], theta)
+
+                        for axis in edge_pieces:
+                            for piece in axis:
+                                flag = True
+                                for vertex in piece:
+                                    if vertex[2] < 0:
+                                        flag = False
+                                        break
+                                if flag:
+                                    for i in range(8):
+                                        piece[i] = z_rot(piece[i], theta)
+
+                        # for i in range(2):
+                        #     for j in range(8):
+                        #         # X & Y
+                        #         edge_pieces[i][front_edges[i][0]][j] = z_rot(edge_pieces[i][front_edges[i][0]][j], theta)
+                        #         edge_pieces[i][front_edges[i][1]][j] = z_rot(edge_pieces[i][front_edges[i][1]][j], theta)
                         update()
 
                 if event.key == pygame.K_l:
@@ -114,6 +126,25 @@ def main():
                     for x in range(12):
                         for i in range(8):
                             center_pieces[1][i] = x_rot(center_pieces[1][i], theta)
+
+                        for axis in edge_pieces:
+                            for piece in axis:
+                                flag = True
+                                for vertex in piece:
+                                    if vertex[0] > 0:
+                                        flag = False
+                                        break
+                                if flag:
+                                    for i in range(8):
+                                        piece[i] = x_rot(piece[i], theta)
+
+                        # for j in range(8):
+                        #     # Y
+                        #     edge_pieces[1][left_edges[0][0]][j] = x_rot(edge_pieces[1][left_edges[0][0]][j], theta)
+                        #     edge_pieces[1][left_edges[0][1]][j] = x_rot(edge_pieces[1][left_edges[0][1]][j], theta)
+                        #     # Z
+                        #     edge_pieces[2][left_edges[1][0]][j] = x_rot(edge_pieces[2][left_edges[1][0]][j], theta)
+                        #     edge_pieces[2][left_edges[1][1]][j] = x_rot(edge_pieces[2][left_edges[1][1]][j], theta)
                         update()
 
                 if event.key == pygame.K_b:
@@ -126,11 +157,23 @@ def main():
                     for x in range(12):
                         for i in range(8):
                             center_pieces[2][i] = z_rot(center_pieces[2][i], theta)
-                        for i in range(2):
-                            for j in range(8):
-                                # X & Y
-                                edge_pieces[i][back_edges[i][0]][j] = z_rot(edge_pieces[i][back_edges[i][0]][j], theta)
-                                edge_pieces[i][back_edges[i][1]][j] = z_rot(edge_pieces[i][back_edges[i][1]][j], theta)
+
+                        for axis in edge_pieces:
+                            for piece in axis:
+                                flag = True
+                                for vertex in piece:
+                                    if vertex[2] > 0:
+                                        flag = False
+                                        break
+                                if flag:
+                                    for i in range(8):
+                                        piece[i] = z_rot(piece[i], theta)
+
+                        # for i in range(2):
+                        #     for j in range(8):
+                        #         # X & Y
+                        #         edge_pieces[i][back_edges[i][0]][j] = z_rot(edge_pieces[i][back_edges[i][0]][j], theta)
+                        #         edge_pieces[i][back_edges[i][1]][j] = z_rot(edge_pieces[i][back_edges[i][1]][j], theta)
                         update()
 
                 if event.key == pygame.K_r:
@@ -143,6 +186,25 @@ def main():
                     for x in range(12):
                         for i in range(8):
                             center_pieces[3][i] = x_rot(center_pieces[3][i], theta)
+
+                        for axis in edge_pieces:
+                            for piece in axis:
+                                flag = True
+                                for vertex in piece:
+                                    if vertex[0] < 0:
+                                        flag = False
+                                        break
+                                if flag:
+                                    for i in range(8):
+                                        piece[i] = x_rot(piece[i], theta)
+
+                        # for j in range(8):
+                        #     # Y
+                        #     edge_pieces[1][right_edges[0][0]][j] = x_rot(edge_pieces[1][right_edges[0][0]][j], theta)
+                        #     edge_pieces[1][right_edges[0][1]][j] = x_rot(edge_pieces[1][right_edges[0][1]][j], theta)
+                        #     # Z
+                        #     edge_pieces[2][right_edges[1][0]][j] = x_rot(edge_pieces[2][right_edges[1][0]][j], theta)
+                        #     edge_pieces[2][right_edges[1][1]][j] = x_rot(edge_pieces[2][right_edges[1][1]][j], theta)
                         update()
 
                 if event.key == pygame.K_u:
@@ -155,6 +217,18 @@ def main():
                     for x in range(12):
                         for i in range(8):
                             center_pieces[4][i] = y_rot(center_pieces[4][i], theta)
+
+                        for axis in edge_pieces:
+                            for piece in axis:
+                                flag = True
+                                for vertex in piece:
+                                    if vertex[1] < 0:
+                                        flag = False
+                                        break
+                                if flag:
+                                    for i in range(8):
+                                        piece[i] = y_rot(piece[i], theta)
+
                         update()
 
                 if event.key == pygame.K_d:
@@ -167,6 +241,18 @@ def main():
                     for x in range(12):
                         for i in range(8):
                             center_pieces[5][i] = y_rot(center_pieces[5][i], theta)
+
+                        for axis in edge_pieces:
+                            for piece in axis:
+                                flag = True
+                                for vertex in piece:
+                                    if vertex[1] > 0:
+                                        flag = False
+                                        break
+                                if flag:
+                                    for i in range(8):
+                                        piece[i] = y_rot(piece[i], theta)
+
                         update()
 
                 # Reset to default view
