@@ -24,7 +24,7 @@ def main():
     pygame.display.set_mode(display, DOUBLEBUF | OPENGL)
     pygame.display.set_caption('PyCube')
 
-    glClearColor(1, 1, 1, 0)
+    # glClearColor(1, 1, 1, 0)
     # Using depth test to make sure closer colors are shown over further ones
     glEnable(GL_DEPTH_TEST)
     glDepthFunc(GL_LESS)
@@ -32,7 +32,7 @@ def main():
     # Default view
     glMatrixMode(GL_PROJECTION)
     gluPerspective(45, (display[0] / display[1]), 0.5, 40)
-    glTranslatef(0.0, 0.0, -15.0)
+    glTranslatef(0.0, 0.0, -17.5)
 
     # set initial rotation
     # glRotate(90, 1, 0, 0)
@@ -62,6 +62,7 @@ def main():
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 
         draw_cube()
+
         # draw_face()
         # draw_axis()
         pygame.display.flip()
@@ -298,12 +299,29 @@ def main():
         sys.stdout.flush()
         # time.sleep(5000)
 
+pulse_color = [0.0, 0.0, 0.0]
+pulse_val = 0.015
+
 
 def draw_cube():
     glLineWidth(GLfloat(4.0))
     glBegin(GL_LINES)
-    glColor3fv((0.0, 0.0, 0.0))
-    # glColor3fv((0.5, 0.5, 0.5))
+    # glColor3fv((1.0, 1.0, 1.0))
+    glColor3fv((0.6, 0.6, 0.6))
+    # glColor3fv((0.0, 0.0, 0.0))
+
+    # global pulse_color
+    # glColor3fv((pulse_color[0], pulse_color[1], pulse_color[2]))
+    #
+    # global pulse_val
+    #
+    # if pulse_color[0] > 1:
+    #     pulse_val = -0.015
+    # elif pulse_color[0] <= 0.0:
+    #     pulse_val = 0.015
+    #
+    # for i in range(3):
+    #     pulse_color[i] += pulse_val
 
     for axis in edge_pieces:
         for piece in axis:
