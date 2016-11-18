@@ -17,92 +17,117 @@ from OpenGL.GLU import *
 from OpenGL.GLUT import *
 
 
-def main():
-    pygame.init()
-    display = (800, 600)
+class PyCube:
+    def __init__(self):
+        pygame.init()
+        self.width = 800
+        self.height = 600
 
-    pygame.display.set_mode(display, DOUBLEBUF | OPENGL)
-    pygame.display.set_caption('PyCube')
+        pygame.display.set_mode((self.width, self.height), DOUBLEBUF | OPENGL)
+        pygame.display.set_caption('PyCube')
 
-    # glClearColor(1, 1, 1, 0)
-    # Using depth test to make sure closer colors are shown over further ones
-    glEnable(GL_DEPTH_TEST)
-    glDepthFunc(GL_LESS)
+        glClearColor(1, 1, 1, 0)
+        # Using depth test to make sure closer colors are shown over further ones
+        glEnable(GL_DEPTH_TEST)
+        glDepthFunc(GL_LESS)
 
-    # Default view
-    glMatrixMode(GL_PROJECTION)
-    gluPerspective(45, (display[0] / display[1]), 0.5, 40)
-    glTranslatef(0.0, 0.0, -17.5)
+        # Default view
+        glMatrixMode(GL_PROJECTION)
+        gluPerspective(45, (self.width / self.height), 0.5, 40)
+        glTranslatef(0.0, 0.0, -17.5)
 
-    # set initial rotation
-    # glRotate(90, 1, 0, 0)
-    # glRotate(-15, 0, 0, 1)
-    # glRotate(15, 1, 0, 0)
+    def create_window(self, width, height):
+        '''Updates the window width and height '''
+        # pygame.display.set_caption("Press ESC to quit")
+        pygame.display.set_mode((width, height), DOUBLEBUF | OPENGL | RESIZABLE)
+        gluPerspective(45, (width / height), 0.5, 40)
 
-    inc_x = 0
-    inc_y = 0
-    accum = (1, 0, 0, 0)
-    zoom = 1
+    def run(self):
 
-    def update():
-        pygame.mouse.get_rel()  # prevents the cube from instantly rotating to a newly clicked mouse coordinate
+        # set initial rotation
+        # glRotate(90, 1, 0, 0)
+        # glRotate(-15, 0, 0, 1)
+        # glRotate(15, 1, 0, 0)
 
-        rot_x = normalize(axisangle_to_q((1.0, 0.0, 0.0), inc_x))
-        rot_y = normalize(axisangle_to_q((0.0, 1.0, 0.0), inc_y))
+        inc_x = 0
+        inc_y = 0
+        accum = (1, 0, 0, 0)
+        zoom = 1
 
-        nonlocal accum
-        accum = q_mult(accum, rot_x)
-        accum = q_mult(accum, rot_y)
-        # print(accum)
+        def update():
 
-        glMatrixMode(GL_MODELVIEW)
-        glLoadMatrixf(q_to_mat4(accum))
-        glScalef(zoom, zoom, zoom)
+            pygame.mouse.get_rel()  # prevents the cube from instantly rotating to a newly clicked mouse coordinate
 
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+            rot_x = normalize(axisangle_to_q((1.0, 0.0, 0.0), inc_x))
+            rot_y = normalize(axisangle_to_q((0.0, 1.0, 0.0), inc_y))
 
-        draw_cube()
+            nonlocal accum
+            accum = q_mult(accum, rot_x)
+            accum = q_mult(accum, rot_y)
+            # print(accum)
 
-        # draw_face()
-        # draw_axis()
-        pygame.display.flip()
-        # pygame.time.wait(1)
+            glMatrixMode(GL_MODELVIEW)
+            glLoadMatrixf(q_to_mat4(accum))
+            glScalef(zoom, zoom, zoom)
 
-    # for v in left_face:
-    #     print(v)
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 
-    while True:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                quit()
+            self.draw_cube()
 
-            if event.type == pygame.KEYDOWN:
-                # Rotating about the x axis
-                if event.key == pygame.K_UP:  # or event.key == pygame.K_w:
-                    inc_x = pi / 100
-                if event.key == pygame.K_DOWN:  # or event.key == pygame.K_s:
-                    inc_x = -pi / 100
+            # draw_face()
+            # self.draw_axis()
+            pygame.display.flip()
+            # pygame.time.wait(1)
 
-                # Rotating about the y axis
-                if event.key == pygame.K_LEFT:  # or event.key == pygame.K_a:
-                    inc_y = pi / 100
-                if event.key == pygame.K_RIGHT:  # or event.key == pygame.K_d:
-                    inc_y = -pi / 100
+        # for v in left_face:
+        #     print(v)
 
-                if event.key == pygame.K_f:
-                    if pygame.key.get_mods() & KMOD_SHIFT:
-                        sys.stdout.write("F\'")
-                        theta = 0.13089969389957471827
-                    else:
-                        sys.stdout.write("F")
-                        theta = -0.13089969389957471827
-                    for x in range(12):
-                        for i in range(8):
-                            center_pieces[0][i] = z_rot(center_pieces[0][i], theta)
+        while True:
+            theta = 0.13089969389957471827
+            theta_inc = 12
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
+                    # elif event.type == VIDEORESIZE:
+                    # self.CreateWindow(event.w, event.h)
+                    # update()
 
-                        for axis in edge_pieces:
-                            for piece in axis:
+                if event.type == pygame.KEYDOWN:
+                    # Rotating about the x axis
+                    if event.key == pygame.K_UP:  # or event.key == pygame.K_w:
+                        inc_x = pi / 100
+                    if event.key == pygame.K_DOWN:  # or event.key == pygame.K_s:
+                        inc_x = -pi / 100
+
+                    # Rotating about the y axis
+                    if event.key == pygame.K_LEFT:  # or event.key == pygame.K_a:
+                        inc_y = pi / 100
+                    if event.key == pygame.K_RIGHT:  # or event.key == pygame.K_d:
+                        inc_y = -pi / 100
+
+                    if event.key == pygame.K_f:
+                        if pygame.key.get_mods() & KMOD_SHIFT:
+                            sys.stdout.write("F\'")
+                            theta *= 1
+                        else:
+                            sys.stdout.write("F")
+                            theta *= -1
+                        for x in range(theta_inc):
+                            for i in range(8):
+                                center_pieces[0][i] = z_rot(center_pieces[0][i], theta)
+
+                            for axis in edge_pieces:
+                                for piece in axis:
+                                    flag = True
+                                    for vertex in piece:
+                                        if vertex[2] < 0:
+                                            flag = False
+                                            break
+                                    if flag:
+                                        for i in range(8):
+                                            piece[i] = z_rot(piece[i], theta)
+                            for piece in corner_pieces:
                                 flag = True
                                 for vertex in piece:
                                     if vertex[2] < 0:
@@ -112,26 +137,30 @@ def main():
                                     for i in range(8):
                                         piece[i] = z_rot(piece[i], theta)
 
-                        # for i in range(2):
-                        #     for j in range(8):
-                        #         # X & Y
-                        #         edge_pieces[i][front_edges[i][0]][j] = z_rot(edge_pieces[i][front_edges[i][0]][j], theta)
-                        #         edge_pieces[i][front_edges[i][1]][j] = z_rot(edge_pieces[i][front_edges[i][1]][j], theta)
-                        update()
+                            update()
 
-                if event.key == pygame.K_l:
-                    if pygame.key.get_mods() & KMOD_SHIFT:
-                        sys.stdout.write("L\'")
-                        theta = -0.13089969389957471827
-                    else:
-                        sys.stdout.write("L")
-                        theta = 0.13089969389957471827
-                    for x in range(12):
-                        for i in range(8):
-                            center_pieces[1][i] = x_rot(center_pieces[1][i], theta)
+                    if event.key == pygame.K_l:
+                        if pygame.key.get_mods() & KMOD_SHIFT:
+                            sys.stdout.write("L\'")
+                            theta *= -1
+                        else:
+                            sys.stdout.write("L")
+                            theta *= 1
+                        for x in range(theta_inc):
+                            for i in range(8):
+                                center_pieces[1][i] = x_rot(center_pieces[1][i], theta)
 
-                        for axis in edge_pieces:
-                            for piece in axis:
+                            for axis in edge_pieces:
+                                for piece in axis:
+                                    flag = True
+                                    for vertex in piece:
+                                        if vertex[0] > 0:
+                                            flag = False
+                                            break
+                                    if flag:
+                                        for i in range(8):
+                                            piece[i] = x_rot(piece[i], theta)
+                            for piece in corner_pieces:
                                 flag = True
                                 for vertex in piece:
                                     if vertex[0] > 0:
@@ -141,28 +170,30 @@ def main():
                                     for i in range(8):
                                         piece[i] = x_rot(piece[i], theta)
 
-                        # for j in range(8):
-                        #     # Y
-                        #     edge_pieces[1][left_edges[0][0]][j] = x_rot(edge_pieces[1][left_edges[0][0]][j], theta)
-                        #     edge_pieces[1][left_edges[0][1]][j] = x_rot(edge_pieces[1][left_edges[0][1]][j], theta)
-                        #     # Z
-                        #     edge_pieces[2][left_edges[1][0]][j] = x_rot(edge_pieces[2][left_edges[1][0]][j], theta)
-                        #     edge_pieces[2][left_edges[1][1]][j] = x_rot(edge_pieces[2][left_edges[1][1]][j], theta)
-                        update()
+                            update()
 
-                if event.key == pygame.K_b:
-                    if pygame.key.get_mods() & KMOD_SHIFT:
-                        sys.stdout.write("B\'")
-                        theta = -0.13089969389957471827
-                    else:
-                        sys.stdout.write("B")
-                        theta = 0.13089969389957471827
-                    for x in range(12):
-                        for i in range(8):
-                            center_pieces[2][i] = z_rot(center_pieces[2][i], theta)
+                    if event.key == pygame.K_b:
+                        if pygame.key.get_mods() & KMOD_SHIFT:
+                            sys.stdout.write("B\'")
+                            theta *= -1
+                        else:
+                            sys.stdout.write("B")
+                            theta *= 1
+                        for x in range(theta_inc):
+                            for i in range(8):
+                                center_pieces[2][i] = z_rot(center_pieces[2][i], theta)
 
-                        for axis in edge_pieces:
-                            for piece in axis:
+                            for axis in edge_pieces:
+                                for piece in axis:
+                                    flag = True
+                                    for vertex in piece:
+                                        if vertex[2] > 0:
+                                            flag = False
+                                            break
+                                    if flag:
+                                        for i in range(8):
+                                            piece[i] = z_rot(piece[i], theta)
+                            for piece in corner_pieces:
                                 flag = True
                                 for vertex in piece:
                                     if vertex[2] > 0:
@@ -172,26 +203,30 @@ def main():
                                     for i in range(8):
                                         piece[i] = z_rot(piece[i], theta)
 
-                        # for i in range(2):
-                        #     for j in range(8):
-                        #         # X & Y
-                        #         edge_pieces[i][back_edges[i][0]][j] = z_rot(edge_pieces[i][back_edges[i][0]][j], theta)
-                        #         edge_pieces[i][back_edges[i][1]][j] = z_rot(edge_pieces[i][back_edges[i][1]][j], theta)
-                        update()
+                            update()
 
-                if event.key == pygame.K_r:
-                    if pygame.key.get_mods() & KMOD_SHIFT:
-                        sys.stdout.write("R\'")
-                        theta = 0.13089969389957471827
-                    else:
-                        sys.stdout.write("R")
-                        theta = -0.13089969389957471827
-                    for x in range(12):
-                        for i in range(8):
-                            center_pieces[3][i] = x_rot(center_pieces[3][i], theta)
+                    if event.key == pygame.K_r:
+                        if pygame.key.get_mods() & KMOD_SHIFT:
+                            sys.stdout.write("R\'")
+                            theta *= 1
+                        else:
+                            sys.stdout.write("R")
+                            theta *= -1
+                        for x in range(theta_inc):
+                            for i in range(8):
+                                center_pieces[3][i] = x_rot(center_pieces[3][i], theta)
 
-                        for axis in edge_pieces:
-                            for piece in axis:
+                            for axis in edge_pieces:
+                                for piece in axis:
+                                    flag = True
+                                    for vertex in piece:
+                                        if vertex[0] < 0:
+                                            flag = False
+                                            break
+                                    if flag:
+                                        for i in range(8):
+                                            piece[i] = x_rot(piece[i], theta)
+                            for piece in corner_pieces:
                                 flag = True
                                 for vertex in piece:
                                     if vertex[0] < 0:
@@ -201,28 +236,30 @@ def main():
                                     for i in range(8):
                                         piece[i] = x_rot(piece[i], theta)
 
-                        # for j in range(8):
-                        #     # Y
-                        #     edge_pieces[1][right_edges[0][0]][j] = x_rot(edge_pieces[1][right_edges[0][0]][j], theta)
-                        #     edge_pieces[1][right_edges[0][1]][j] = x_rot(edge_pieces[1][right_edges[0][1]][j], theta)
-                        #     # Z
-                        #     edge_pieces[2][right_edges[1][0]][j] = x_rot(edge_pieces[2][right_edges[1][0]][j], theta)
-                        #     edge_pieces[2][right_edges[1][1]][j] = x_rot(edge_pieces[2][right_edges[1][1]][j], theta)
-                        update()
+                            update()
 
-                if event.key == pygame.K_u:
-                    if pygame.key.get_mods() & KMOD_SHIFT:
-                        sys.stdout.write("U\'")
-                        theta = 0.13089969389957471827
-                    else:
-                        sys.stdout.write("U")
-                        theta = -0.13089969389957471827
-                    for x in range(12):
-                        for i in range(8):
-                            center_pieces[4][i] = y_rot(center_pieces[4][i], theta)
+                    if event.key == pygame.K_u:
+                        if pygame.key.get_mods() & KMOD_SHIFT:
+                            sys.stdout.write("U\'")
+                            theta *= 1
+                        else:
+                            sys.stdout.write("U")
+                            theta *= -1
+                        for x in range(theta_inc):
+                            for i in range(8):
+                                center_pieces[4][i] = y_rot(center_pieces[4][i], theta)
 
-                        for axis in edge_pieces:
-                            for piece in axis:
+                            for axis in edge_pieces:
+                                for piece in axis:
+                                    flag = True
+                                    for vertex in piece:
+                                        if vertex[1] < 0:
+                                            flag = False
+                                            break
+                                    if flag:
+                                        for i in range(8):
+                                            piece[i] = y_rot(piece[i], theta)
+                            for piece in corner_pieces:
                                 flag = True
                                 for vertex in piece:
                                     if vertex[1] < 0:
@@ -232,21 +269,30 @@ def main():
                                     for i in range(8):
                                         piece[i] = y_rot(piece[i], theta)
 
-                        update()
+                            update()
 
-                if event.key == pygame.K_d:
-                    if pygame.key.get_mods() & KMOD_SHIFT:
-                        sys.stdout.write("D\'")
-                        theta = -0.13089969389957471827
-                    else:
-                        sys.stdout.write("D")
-                        theta = 0.13089969389957471827
-                    for x in range(12):
-                        for i in range(8):
-                            center_pieces[5][i] = y_rot(center_pieces[5][i], theta)
+                    if event.key == pygame.K_d:
+                        if pygame.key.get_mods() & KMOD_SHIFT:
+                            sys.stdout.write("D\'")
+                            theta *= -1
+                        else:
+                            sys.stdout.write("D")
+                            theta *= 1
+                        for x in range(theta_inc):
+                            for i in range(8):
+                                center_pieces[5][i] = y_rot(center_pieces[5][i], theta)
 
-                        for axis in edge_pieces:
-                            for piece in axis:
+                            for axis in edge_pieces:
+                                for piece in axis:
+                                    flag = True
+                                    for vertex in piece:
+                                        if vertex[1] > 0:
+                                            flag = False
+                                            break
+                                    if flag:
+                                        for i in range(8):
+                                            piece[i] = y_rot(piece[i], theta)
+                            for piece in corner_pieces:
                                 flag = True
                                 for vertex in piece:
                                     if vertex[1] > 0:
@@ -256,166 +302,173 @@ def main():
                                     for i in range(8):
                                         piece[i] = y_rot(piece[i], theta)
 
-                        update()
+                            update()
 
-                # Reset to default view
-                if event.key == pygame.K_SPACE:
-                    inc_x = 0
-                    inc_y = 0
-                    accum = (1, 0, 0, 0)
-                    zoom = 1
+                    # Reset to default view
+                    if event.key == pygame.K_SPACE:
+                        inc_x = 0
+                        inc_y = 0
+                        accum = (1, 0, 0, 0)
+                        zoom = 1
 
-            if event.type == pygame.KEYUP:
-                # Stoping rotation
-                if event.key == pygame.K_UP or event.key == pygame.K_DOWN or \
-                                event.key == pygame.K_w or event.key == pygame.K_s:
-                    inc_x = 0.0
-                if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT or \
-                                event.key == pygame.K_a or event.key == pygame.K_d or \
-                                event.key == pygame.K_l or event.key == pygame.K_f:
-                    inc_y = 0.0
+                if event.type == pygame.KEYUP:
+                    # Stoping rotation
+                    if event.key == pygame.K_UP or event.key == pygame.K_DOWN or \
+                                    event.key == pygame.K_w or event.key == pygame.K_s:
+                        inc_x = 0.0
+                    if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT or \
+                                    event.key == pygame.K_a or event.key == pygame.K_d or \
+                                    event.key == pygame.K_l or event.key == pygame.K_f:
+                        inc_y = 0.0
 
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                # Increase scale (zoom) value
-                if event.button == 4:
-                    if zoom < 1.6:
-                        zoom += 0.05
-                        # print('scroll up', zoom)
-            if event.type == pygame.MOUSEBUTTONUP:
-                # Increase scale (zoom) value
-                if event.button == 5:
-                    if zoom > 0.3:
-                        zoom -= 0.05
-                        # print('scroll down', zoom)
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    # Increase scale (zoom) value
+                    if event.button == 4:
+                        if zoom < 1.6:
+                            zoom += 0.05
+                            # print('scroll up', zoom)
+                if event.type == pygame.MOUSEBUTTONUP:
+                    # Increase scale (zoom) value
+                    if event.button == 5:
+                        if zoom > 0.3:
+                            zoom -= 0.05
+                            # print('scroll down', zoom)
 
-        # Get relative movement of mouse coordinates and update x and y incs
-        if pygame.mouse.get_pressed()[0] == 1:
-            (tmp_x, tmp_y) = pygame.mouse.get_rel()
-            # print(tmp_x, tmp_y)
-            inc_x = -tmp_y * pi / 450
-            inc_y = -tmp_x * pi / 450
+            # Get relative movement of mouse coordinates and update x and y incs
+            if pygame.mouse.get_pressed()[0] == 1:
+                (tmp_x, tmp_y) = pygame.mouse.get_rel()
+                # print(tmp_x, tmp_y)
+                inc_x = -tmp_y * pi / 450
+                inc_y = -tmp_x * pi / 450
 
-        update()
-        sys.stdout.flush()
-        # time.sleep(5000)
+            update()
+            sys.stdout.flush()
+            # time.sleep(5000)
 
-pulse_color = [0.0, 0.0, 0.0]
-pulse_val = 0.015
+    pulse_color = [0.0, 0.0, 0.0]
+    pulse_val = 0.04
 
+    def draw_cube(self):
+        glLineWidth(GLfloat(6.0))
+        glBegin(GL_LINES)
+        # glColor3fv((1.0, 1.0, 1.0))
+        # glColor3fv((0.5, 0.5, 0.5))
+        glColor3fv((0.0, 0.0, 0.0))
 
-def draw_cube():
-    glLineWidth(GLfloat(4.0))
-    glBegin(GL_LINES)
-    # glColor3fv((1.0, 1.0, 1.0))
-    glColor3fv((0.6, 0.6, 0.6))
-    # glColor3fv((0.0, 0.0, 0.0))
+        # global pulse_color
+        # glColor3fv((pulse_color[0], pulse_color[1], pulse_color[2]))
+        #
+        # global pulse_val
+        #
+        # if pulse_color[0] > 1:
+        #     pulse_val = -0.04
+        # elif pulse_color[0] <= 0.0:
+        #     pulse_val = 0.04
+        #
+        # for i in range(3):
+        #     pulse_color[i] += pulse_val
 
-    # global pulse_color
-    # glColor3fv((pulse_color[0], pulse_color[1], pulse_color[2]))
-    #
-    # global pulse_val
-    #
-    # if pulse_color[0] > 1:
-    #     pulse_val = -0.015
-    # elif pulse_color[0] <= 0.0:
-    #     pulse_val = 0.015
-    #
-    # for i in range(3):
-    #     pulse_color[i] += pulse_val
-
-    for axis in edge_pieces:
-        for piece in axis:
+        for axis in edge_pieces:
+            for piece in axis:
+                for edge in cube_edges:
+                    for vertex in edge:
+                        glVertex3fv(piece[vertex])
+        for piece in center_pieces:
             for edge in cube_edges:
                 for vertex in edge:
                     glVertex3fv(piece[vertex])
-    for piece in center_pieces:
-        for edge in cube_edges:
-            for vertex in edge:
+        for piece in corner_pieces:
+            for edge in cube_edges:
+                for vertex in edge:
+                    glVertex3fv(piece[vertex])
+        glEnd()
+        self.draw_stickers()
+
+    def draw_stickers(self):
+        glBegin(GL_QUADS)
+        i = 0
+        for color, surface in zip(cube_colors, cube_surfaces):
+            glColor3fv(color)
+            for vertex in surface:
+                glVertex3fv(center_pieces[i][vertex])
+            j = 0
+            for piece in center_pieces:
+                glColor3fv((0, 0, 0))
+                for vertex in surface:
+                    glVertex3fv(center_pieces[j][vertex])
+                j += 1
+            i += 1
+
+        for color, surface, face in zip(cube_colors, cube_surfaces, edges):
+            glColor3fv(color)
+            for piece in face:
+                for vertex in surface:
+                    glVertex3fv(edge_pieces[piece[0]][piece[1]][vertex])
+
+        # Black inner sides of edge pieces
+        glColor3fv((0, 0, 0))
+        for piece in edge_pieces[0]:
+            for vertex in cube_surfaces[1]:
                 glVertex3fv(piece[vertex])
-    glEnd()
-    draw_stickers()
+            for vertex in cube_surfaces[3]:
+                glVertex3fv(piece[vertex])
+
+        for piece in edge_pieces[1]:
+            for vertex in cube_surfaces[4]:
+                glVertex3fv(piece[vertex])
+            for vertex in cube_surfaces[5]:
+                glVertex3fv(piece[vertex])
+
+        for piece in edge_pieces[2]:
+            for vertex in cube_surfaces[0]:
+                glVertex3fv(piece[vertex])
+            for vertex in cube_surfaces[2]:
+                glVertex3fv(piece[vertex])
+
+        corner_color_pat = [
+            [0, 1, 5],  # 0
+            [0, 1, 4],  # 1
+            [0, 3, 4],  # 2
+            [0, 3, 5],  # 3
+            [2, 1, 5],  # 4
+            [2, 1, 4],  # 5
+            [2, 3, 4],  # 6
+            [2, 3, 5],  # 7
+        ]
+
+        corner_black_pat = [
+            [2, 3, 4],  # 0
+            [2, 3, 5],  # 1
+            [2, 1, 5],  # 2
+            [2, 1, 4],  # 3
+            [0, 3, 4],  # 4
+            [0, 3, 5],  # 5
+            [0, 1, 5],  # 6
+            [0, 1, 4],  # 7
+        ]
+
+        for i in range(len(corner_color_pat)):
+            for face in corner_color_pat[i]:
+                glColor3fv(cube_colors[face])
+                for vertex in cube_surfaces[face]:
+                    glVertex3fv(corner_pieces[i][vertex])
+        glColor3fv((0, 0, 0))
+        for i in range(len(corner_black_pat)):
+            for face in corner_black_pat[i]:
+                for vertex in cube_surfaces[face]:
+                    glVertex3fv(corner_pieces[i][vertex])
+
+        glEnd()
+
+    def draw_axis(self):
+        glLineWidth(GLfloat(1.0))
+        glBegin(GL_LINES)
+
+        for color, axis in zip(axis_colors, axes):
+            glColor3fv(color)
+            for point in axis:
+                glVertex3fv(axis_verts[point])
+        glEnd()
 
 
-def draw_stickers():
-    glBegin(GL_QUADS)
-    i = 0
-    for color, surface in zip(cube_colors, cube_surfaces):
-        glColor3fv(color)
-        for vertex in surface:
-            glVertex3fv(center_pieces[i][vertex])
-        j = 0
-        for piece in center_pieces:
-            glColor3fv((0, 0, 0))
-            for vertex in surface:
-                glVertex3fv(center_pieces[j][vertex])
-            j += 1
-        i += 1
-
-    # Black inner sides of edge pieces
-    glColor3fv((0, 0, 0))
-    for piece in edge_pieces[0]:
-        for vertex in cube_surfaces[1]:
-            glVertex3fv(piece[vertex])
-        for vertex in cube_surfaces[3]:
-            glVertex3fv(piece[vertex])
-
-    for piece in edge_pieces[1]:
-        for vertex in cube_surfaces[4]:
-            glVertex3fv(piece[vertex])
-        for vertex in cube_surfaces[5]:
-            glVertex3fv(piece[vertex])
-
-    for piece in edge_pieces[2]:
-        for vertex in cube_surfaces[0]:
-            glVertex3fv(piece[vertex])
-        for vertex in cube_surfaces[2]:
-            glVertex3fv(piece[vertex])
-
-    # White front face
-    # glColor3fv(cube_colors[0])
-    # for vertex in cube_surfaces[0]:
-    #     glVertex3fv(edge_pieces[1][0][vertex])
-    #
-    # for vertex in cube_surfaces[0]:
-    #     glVertex3fv(edge_pieces[1][3][vertex])
-    #
-    # for vertex in cube_surfaces[0]:
-    #     glVertex3fv(edge_pieces[0][0][vertex])
-    #
-    # for vertex in cube_surfaces[0]:
-    #     glVertex3fv(edge_pieces[0][1][vertex])
-    #
-    # # red right face
-    # glColor3fv(cube_colors[1])
-    # for vertex in cube_surfaces[1]:
-    #     glVertex3fv(edge_pieces[1][0][vertex])
-    #
-    # for vertex in cube_surfaces[1]:
-    #     glVertex3fv(edge_pieces[1][1][vertex])
-    #
-    # for vertex in cube_surfaces[1]:
-    #     glVertex3fv(edge_pieces[2][0][vertex])
-    #
-    # for vertex in cube_surfaces[1]:
-    #     glVertex3fv(edge_pieces[2][1][vertex])
-
-    for color, surface, face in zip(cube_colors, cube_surfaces, edges):
-        glColor3fv(color)
-        for piece in face:
-            for vertex in surface:
-                glVertex3fv(edge_pieces[piece[0]][piece[1]][vertex])
-
-    glEnd()
-
-
-def draw_axis():
-    glBegin(GL_LINES)
-
-    for color, axis in zip(axis_colors, axes):
-        glColor3fv(color)
-        for point in axis:
-            glVertex3fv(axis_verts[point])
-    glEnd()
-
-
-main()
+PyCube().run()

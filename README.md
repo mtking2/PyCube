@@ -8,6 +8,9 @@ Here's a .gif showing the progress as of 11/16/16.
 Progress as of 11/17/16.  
 <img src="resources/pycube_centers_edges.gif" width="400">
 
+Progress as of 11/18/16.  
+<img src="resources/pycube_all.gif" width="400">
+
 ### Purpose
 This software-based Rubik's Cube will serve as a basis for a later
 project in which I will attempt to create another program, implementing
@@ -38,13 +41,13 @@ Only supported by Python 3.x+. Try at your own risk.
 * ~~Map keys and rotation matrix calls to respective center pieces~~
 * ~~Color center pieces~~
 * ~~Implement edge pieces~~
-* Implement corner pieces
+* ~~Implement corner pieces~~
 * ~~Solve correct movement of edge pieces~~
     * ~~Use face patterns to track position of edge/corner pieces~~ FAILURE
 * ~~Solve correct movement of corner pieces~~
-* Color edge pieces
-* Color corner pieces
-* Test/bug fix function cube
+* ~~Color edge pieces~~
+* ~~Color corner pieces~~
+* Test/bug fix cube
 * Test solves with PyCube
 * Begin implementing reverse moves solver
 * ...
