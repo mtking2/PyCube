@@ -2,9 +2,11 @@
 
 PyCube is an 3D interactive Rubik's Cube using OpenGL and Pygame.
 
-Here's a .gif showing the progress as of 11/16/16.
+Here's a .gif showing the progress as of 11/16/16.  
+<img src="resources/pycube_cpcs.gif" width="400">
 
-<img src="resources/pycube_cpcs.gif" width="500">
+Progress as of 11/17/16.  
+<img src="resources/pycube_centers_edges.gif" width="400">
 
 ### Purpose
 This software-based Rubik's Cube will serve as a basis for a later
@@ -21,9 +23,10 @@ This program utilizes the following Python modules:
 Python 3.x :  
 `pip3 install pyopengl pygame numpy`
 
+Only supported by Python 3.x+. Try at your own risk.  
 ~~Python 2.x :  
 `pip install pyopengl pygame numpy`~~  
-Only supported by Python 3.x+. Try at your own risk.
+
 
 ### TODO
 
