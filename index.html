@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>PyCube Blog</title>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
@@ -26,29 +27,31 @@
     -->
 
     <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"  style="border: 0 !important;">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                data-target="#bs-example-navbar-collapse-1" style="border: 0 !important;">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="http://www.wcu.edu"><img alt="WCU" src="../mtking2.github.io/images/wcu.png" style="height:45px;"></a>
+                <a class="navbar-brand" href="http://www.wcu.edu"><img alt="WCU"
+                    src="../mtking2.github.io/images/wcu.png" style="height:45px;"></a>
 
-        </div>
+            </div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav navbar-left">
-            <li><a href="../">Home<span class="sr-only">(current)</span></a></li>
-            <li><a href="../cal/">Schedule<span class="sr-only">(current)</span></a></li>
-            <li><a href="../cv/">CV<span class="sr-only">(current)</span></a></li>
-            <li><a href="../coursework/">Projects & Course Work<span class="sr-only">(current)</span></a></li>
-          </ul>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-left">
+                    <li><a href="../">Home<span class="sr-only">(current)</span></a></li>
+                    <li><a href="../cal/">Schedule<span class="sr-only">(current)</span></a></li>
+                    <li><a href="../cv/">CV<span class="sr-only">(current)</span></a></li>
+                    <li><a href="../coursework/">Projects & Course Work<span class="sr-only">(current)</span></a></li>
+                </ul>
 
-          <!-- <div class="visible-xs-block visible-sm-block">
+                <!-- <div class="visible-xs-block visible-sm-block">
           <form class="navbar-form navbar-right" role="search"  style="border: 0 !important;">
             <div class="input-group">
                 <input type="text" class="form-control" placeholder="Search">
@@ -61,8 +64,10 @@
           </form>
           </div> -->
 
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
     </nav>
 
 
@@ -74,8 +79,8 @@
 
 
             <div class="col-md-8">
-              <div class="well">
-                <h1 class="page-header">
+                <div class="well">
+                    <h1 class="page-header">
                     PyCube Blog
                     <small>A 3D interactive Rubik's Cube</small>
                     <br>
@@ -84,109 +89,122 @@
                       See the repo on GitHub <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                     </a>
                 </h1>
-                <small style="font-size:16px;">More on neural network coming in the future!</small><br>
-                <br>
+                    <small style="font-size:16px;">More on neural network coming in the future!</small><br>
+                    <br>
 
+                </div>
 
+                <div class="well visible-xs-block visible-sm-block">
+                    <h1 id="pycube">About the project</h1><br>
+                    <p>PyCube is an 3D interactive Rubik's Cube using OpenGL and Pygame.</p>
+                    <!-- <img src="resources/pycube.gif" alt="PyCube Gif" width="100%"/><br> -->
+                    <h2 id="purpose">Purpose</h2>
+                    <p style="font-size:16px">
+                        This software-based Rubik's Cube will serve as a basis for a later project in which I will
+                        attempt to create another program, implementing a neural network algorithm, that will teach
+                        itself to solve a Rubik's Cube (PyCube).
+                    </p>
 
-                <!-- Second Blog Post -->
-                <!-- <h2>
-                    <a href="#">Blog Post Title</a>
-                </h2>
-                <p class="lead">
-                    by <a href="index.php">Start Bootstrap</a>
-                </p>
-                <p><span class="glyphicon glyphicon-time"></span> Posted on August 28, 2013 at 10:45 PM</p>
-                <hr>
-                <img class="img-responsive" src="http://placehold.it/900x300" alt="">
-                <hr>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam, quasi, fugiat, asperiores harum voluptatum tenetur a possimus nesciunt quod accusamus saepe tempora ipsam distinctio minima dolorum perferendis labore impedit voluptates!</p>
-                <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+                    <h2 id="dependencies">Dependencies</h2>
+                    <p style="font-size:16px">This program utilizes the following Python modules:<br>
+                        <a href="http://pyopengl.sourceforge.net/">PyOpenGL</a>
+                         see also <a href="https://www.opengl.org/">OpenGL</a><br>
+                        <a href="http://pygame.org/">Pygame</a><br>
+                        <a href="http://www.numpy.org/">NumPy</a>
+                    </p>
 
-                <hr> -->
+                    Python 3.x :<br>
+                    <code>pip3 install pyopengl pygame numpy</code><br><br>
+
+                    <s>Python 2.x : <br>
+                    <code>pip install pyopengl pygame numpy</code></s><br>
+                    Only supported by Python 3.x+. Try at your own risk.
+
+                    <h2 id="notable-mentions">Notable Mentions</h2>
+                    <p style="font-size:16px">
+                        <a href="http://stackoverflow.com/questions/30745703/rotating-a-cube-using-quaternions-in-pyopengl">This</a>
+                        post from stackoverflow was very helpful in creating a solid starting point to use quaternions
+                        to rotate a 3 dimensional cube using Python and OpenGL.
+                    </p>
+                </div>
+
+                <div class="well" id="nov16">
+                    <!-- Blog Post 3 -->
+                    <h2>
+                      Things are moving fast
+                  </h2>
+                    <p class="lead">
+                        by <a href="../">Michael</a>
+                    </p>
+                    <p><span class="glyphicon glyphicon-time"></span> Posted on Nov 17, 2016</p>
+                    <hr>
+                    <p style="font-size:16px">
+                        I'm swiftly making significant progress. I have implemented all of the edge pieces and have also
+                        been able to make them rotate correctly with an algorithm that utilizes the rotation matrices.
+                        Correctly coloring each of the edge pieces and 'stickers' was an unforseen challange, but
+                        luckily I was able to tackle that one. Now I will continue on to implement the corner pieces
+                        which shouldn't be too hard considering they won't be much different from the edge pieces.
+                    </p>
+                    <hr>
+                    <div style="text-align: center;">
+                        <img src="resources/pycube_centers_edges.gif" alt="PyCube Gif" width="100%" /></div>
+                </div>
+
+                <div class="well">
+                    <!-- Second Blog Post -->
+                    <h2>
+                      PyCube is under renovation.
+                  </h2>
+                    <p class="lead">
+                        by <a href="../">Michael</a>
+                    </p>
+                    <p><span class="glyphicon glyphicon-time"></span> Posted on Nov 16, 2016</p>
+                    <hr>
+                    <p style="font-size:16px">So over the summer I shelved PyCube until I started looking into graphics
+                        with OpenGL. Seeing how the graphics can be so much better compared to VPython I decided to
+                        revisit PyCube and rebuild it from the ground up using PyOpenGL, Pygame, NumPy, lots of
+                        quaternions, matrix math, and vector management. I think I'm off to a good start. I have a
+                        semi-working Rubik's cube with only the center pieces. You use the FBLRUD keys to rotate the
+                        faces. Lowercase for CW and [Shift] for CCW. Oh, and you can click and drag with the mouse to
+                        move the cube around (can also use arrow keys) as well as zoom in and out with the mouse wheel.
+                        I'm happy with the result but there is still a lot more work to be done.
+                    </p>
+                    <hr>
+                    <div style="text-align: center;">
+                        <img src="resources/pycube_cpcs.gif" alt="PyCube Gif" width="100%" /></div>
+                </div>
+
+                <div class="well" id="may16">
+                    <!-- First Blog Post -->
+                    <h2>
+                      <s>PyCube</s> VPython Rubik's Cube is alive!
+                  </h2>
+                    <p class="lead">
+                        by <a href="../">Michael</a>
+                    </p>
+                    <p><span class="glyphicon glyphicon-time"></span> Posted on May 28, 2016</p>
+                    <hr>
+                    <p style="font-size:16px">
+                        The first version of my Rubik's cube python program is finally alive. I still need to add a few
+                        more features and make a few tweeks but here it is!
+                    </p>
+                    <a class="btn btn-primary" href="https://github.com/mtking2/VPython-Rubiks-Cube" target="_blank">
+                        <i class="fa fa-github fa-lg" aria-hidden="true"></i>
+                         Repo <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    </a>
+                    <hr>
+                    <img src="resources/pycube.resized.gif" alt="PyCube Gif" width="180" />
+                </div>
 
                 <!-- Pager -->
                 <!-- <ul class="pager">
-                    <li class="previous">
-                        <a href="#">&larr; Older</a>
-                    </li>
-                    <li class="next">
-                        <a href="#">Newer &rarr;</a>
-                    </li>
-                </ul> -->
-
-              </div>
-
-              <div class="well visible-xs-block visible-sm-block">
-                <h1 id="pycube">About the project</h1><br>
-                <p>PyCube is an 3D interactive Rubik's Cube using OpenGL and Pygame.</p>
-                <!-- <img src="resources/pycube.gif" alt="PyCube Gif" width="100%"/><br> -->
-                <h2 id="purpose">Purpose</h2>
-                <p style="font-size:16px">This software-based Rubik's Cube will serve as a basis for a later project in which I will attempt to create another program, implementing a neural network algorithm, that will teach itself to solve a Rubik's Cube (PyCube).</p>
-
-                <h2 id="dependencies">Dependencies</h2>
-                <p style="font-size:16px">This program utilizes the following Python modules:<br>
-                <a href="http://pyopengl.sourceforge.net/">PyOpenGL</a> see also <a href="https://www.opengl.org/">OpenGL</a><br>
-                <a href="http://pygame.org/">Pygame</a><br>
-                <a href="http://www.numpy.org/">NumPy</a></p>
-
-                Python 3.x :<br>
-                <code>pip3 install pyopengl pygame numpy</code><br><br>
-
-                <s>Python 2.x : <br>
-                <code>pip install pyopengl pygame numpy</code></s><br>
-                Only supported by Python 3.x+. Try at your own risk.
-
-                <h2 id="notable-mentions">Notable Mentions</h2>
-                <p style="font-size:16px"><a href="http://stackoverflow.com/questions/30745703/rotating-a-cube-using-quaternions-in-pyopengl">This</a> post from stackoverflow was very helpful in creating a solid starting point
-                  to use quaternions to rotate a 3 dimensional cube using Python and OpenGL.</p>
-              </div>
-
-
-              <div class="well" id="nov16">
-                  <!-- Second Blog Post -->
-                  <h2>
-                      PyCube is under renovation.
-                  </h2>
-                  <p class="lead">
-                      by <a href="../">Michael</a>
-                  </p>
-                  <p><span class="glyphicon glyphicon-time"></span> Posted on Nov 16, 2016</p>
-                  <hr>
-                  <p style="font-size:16px">So over the summer I shelved PyCube until I started
-                      looking into graphics with OpenGL. Seeing how the graphics can be so much
-                      better compared to VPython I decided to revisit PyCube and rebuild it
-                      from the ground up using PyOpenGL, Pygame, NumPy, and lots of quaternions and
-                      matrix math and vector management. I think I'm off to a good start. I have a
-                      semi-working Rubik's cube with only the center pieces. You use the FBLRUD keys
-                      to rotate the faces. Lowercase for CW and [Shift] for CCW. Oh, and you can click
-                      and drag with the mouse to move the cube around (can also use arrow keys) as well
-                      as zoom in and out with the mouse wheel. I'm happy with the result but there is still
-                      a lot more work to be done.
-                  </p>
-                  <br><br>
-                  <img src="resources/pycube_cpcs.gif" alt="PyCube Gif" width="100%"/>
-              </div>
-
-              <div class="well" id="may16">
-                  <!-- First Blog Post -->
-                  <h2>
-                      <s>PyCube</s> VPython Rubik's Cube is alive!
-                  </h2>
-                  <p class="lead">
-                      by <a href="../">Michael</a>
-                  </p>
-                  <p><span class="glyphicon glyphicon-time"></span> Posted on May 28, 2016</p>
-                  <hr>
-                  <p style="font-size:16px">The first version of my Rubik's cube python program is finally alive.
-                  I still need to add a few more features and make a few tweeks but here it is!</p>
-                  <a class="btn btn-primary" href="https://github.com/mtking2/VPython-Rubiks-Cube" target="_blank">
-                    <i class="fa fa-github fa-lg" aria-hidden="true"></i>
-                     Repo <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                 </a><br><br>
-                  <img src="resources/pycube.resized.gif" alt="PyCube Gif" width="180"/>
-              </div>
-
+                  <li class="previous">
+                      <a href="#">&larr; Older</a>
+                  </li>
+                  <li class="next">
+                      <a href="#">Newer &rarr;</a>
+                  </li>
+              </ul> -->
 
             </div>
 
@@ -211,28 +229,37 @@
 
                 <!-- Side Widget Well -->
                 <div class="well visible-md-block visible-lg-block">
-                  <h1 id="pycube">About the project</h1><br>
-                  <p>PyCube is an 3D interactive Rubik's Cube using OpenGL and Pygame.</p>
-                  <!-- <img src="resources/pycube.gif" alt="PyCube Gif" width="100%"/><br> -->
-                  <h2 id="purpose">Purpose</h2>
-                  <p style="font-size:16px">This software-based Rubik's Cube will serve as a basis for a later project in which I will attempt to create another program, implementing a neural network algorithm, that will teach itself to solve a Rubik's Cube (PyCube).</p>
+                    <h1 id="pycube">About the project</h1><br>
+                    <p>PyCube is an 3D interactive Rubik's Cube using OpenGL and Pygame.</p>
+                    <!-- <img src="resources/pycube.gif" alt="PyCube Gif" width="100%"/><br> -->
+                    <h2 id="purpose">Purpose</h2>
+                    <p style="font-size:16px">
+                        This software-based Rubik's Cube will serve as a basis for a later project in which I will
+                        attempt to create another program, implementing a neural network algorithm, that will teach
+                        itself to solve a Rubik's Cube (PyCube).
+                    </p>
 
-                  <h2 id="dependencies">Dependencies</h2>
-                  <p style="font-size:16px">This program utilizes the following Python modules:<br>
-                  <a href="http://pyopengl.sourceforge.net/">PyOpenGL</a> see also <a href="https://www.opengl.org/">OpenGL</a><br>
-                  <a href="http://pygame.org/">Pygame</a><br>
-                  <a href="http://www.numpy.org/">NumPy</a></p>
+                    <h2 id="dependencies">Dependencies</h2>
+                    <p style="font-size:16px">This program utilizes the following Python modules:<br>
+                        <a href="http://pyopengl.sourceforge.net/">PyOpenGL</a>
+                         see also <a href="https://www.opengl.org/">OpenGL</a><br>
+                        <a href="http://pygame.org/">Pygame</a><br>
+                        <a href="http://www.numpy.org/">NumPy</a>
+                    </p>
 
-                  Python 3.x :<br>
-                  <code>pip3 install pyopengl pygame numpy</code><br><br>
+                    Python 3.x :<br>
+                    <code>pip3 install pyopengl pygame numpy</code><br><br>
 
-                  <s>Python 2.x : <br>
-                  <code>pip install pyopengl pygame numpy</code></s><br>
-                  Only supported by Python 3.x+. Try at your own risk.
+                    <s>Python 2.x : <br>
+                    <code>pip install pyopengl pygame numpy</code></s><br>
+                    Only supported by Python 3.x+. Try at your own risk.
 
-                  <h2 id="notable-mentions">Notable Mentions</h2>
-                  <p style="font-size:16px"><a href="http://stackoverflow.com/questions/30745703/rotating-a-cube-using-quaternions-in-pyopengl">This</a> post from stackoverflow was very helpful in creating a solid starting point
-                    to use quaternions to rotate a 3 dimensional cube using Python and OpenGL.</p>
+                    <h2 id="notable-mentions">Notable Mentions</h2>
+                    <p style="font-size:16px">
+                        <a href="http://stackoverflow.com/questions/30745703/rotating-a-cube-using-quaternions-in-pyopengl">This</a>
+                        post from stackoverflow was very helpful in creating a solid starting point to use quaternions
+                        to rotate a 3 dimensional cube using Python and OpenGL.
+                    </p>
                 </div>
 
                 <!-- Blog Categories Well -->
@@ -277,18 +304,19 @@
 
     <!-- Footer -->
     <footer>
-      <div style="position: relative; bottom: 0; width:100%; text-align: center;">
-          <p>
-              <a href="https://validator.w3.org/nu/check/referer"
-              title="Validate HTML5"><img src="../mtking2.github.io/images/valid-html51.png"
-              alt="Valid XHTML 1.0" height="20" width="70"/></a>&nbsp;&nbsp;
+        <div style="position: relative; bottom: 0; width:100%; text-align: center;">
+            <p>
+                <a href="https://validator.w3.org/nu/check/referer" title="Validate HTML5">
+                    <img src="../mtking2.github.io/images/valid-html51.png" alt="Valid XHTML 1.0" height="20" width="70"/>
+                </a>&nbsp;&nbsp;
 
-              <a href="https://getbootstrap.com/" title="Bootstrap">
-              <img src="../mtking2.github.io/images/bootstrap.png"
-              alt="Bootstrap" height="20"/></a>&nbsp;&nbsp;
-          </p>
-          <script> document.write("Last modified on: " + document.lastModified +"");</script>
-      </div>
+                <a href="https://getbootstrap.com/" title="Bootstrap">
+                    <img src="../mtking2.github.io/images/bootstrap.png" alt="Bootstrap" height="20" /></a>&nbsp;&nbsp;
+            </p>
+            <script>
+                document.write("Last modified on: " + document.lastModified + "");
+            </script>
+        </div>
     </footer>
 
 
