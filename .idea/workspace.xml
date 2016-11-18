@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a35c0709-ccd5-492b-9a1d-c5e974255bba" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/OpenGL-test.iml" afterPath="$PROJECT_DIR$/.idea/OpenGL-test.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PyCube.py" afterPath="$PROJECT_DIR$/PyCube.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/geometry.py" afterPath="$PROJECT_DIR$/geometry.py" />
     </list>
     <ignored path="OpenGL-test.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -35,11 +32,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="PyCube.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PyCube.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/PyCube.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="306" column="0" selection-start-line="306" selection-start-column="0" selection-end-line="306" selection-end-column="0" />
+            <state relative-caret-position="3311">
+              <caret line="328" column="12" selection-start-line="328" selection-start-column="12" selection-end-line="328" selection-end-column="12" />
               <folding>
                 <element signature="e#178#188#0" expanded="true" />
               </folding>
@@ -47,10 +44,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="geometry.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="geometry.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/geometry.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2268">
+            <state relative-caret-position="-3158">
               <caret line="136" column="19" selection-start-line="136" selection-start-column="19" selection-end-line="136" selection-end-column="19" />
               <folding />
             </state>
@@ -505,7 +502,14 @@
       <option name="project" value="LOCAL" />
       <updated>1479290894072</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Correctly colored the faces of each edge piece. FINALLY.">
+      <created>1479428342311</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1479428342311</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -547,7 +551,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Adding tests in rotation matrices to rotate vertices about the x-axis" />
     <MESSAGE value="Testing of rotating individual pieces is finished. Added working rotation matrix transformation functions for each x, y, and z axes. Working &quot;center pieces only&quot; rubiks cube. Can turn the center piece of each face CW and CWW by typing flbrud/[shift]FLBRUD respectively.  TODO incorporate edge pieces and corner pieces. Updated README with TODOs." />
-    <option name="LAST_COMMIT_MESSAGE" value="Testing of rotating individual pieces is finished. Added working rotation matrix transformation functions for each x, y, and z axes. Working &quot;center pieces only&quot; rubiks cube. Can turn the center piece of each face CW and CWW by typing flbrud/[shift]FLBRUD respectively.  TODO incorporate edge pieces and corner pieces. Updated README with TODOs." />
+    <MESSAGE value="Correctly colored the faces of each edge piece. FINALLY." />
+    <option name="LAST_COMMIT_MESSAGE" value="Correctly colored the faces of each edge piece. FINALLY." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -936,21 +941,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/geometry.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2268">
-          <caret line="136" column="19" selection-start-line="136" selection-start-column="19" selection-end-line="136" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/PyCube.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="306" column="0" selection-start-line="306" selection-start-column="0" selection-end-line="306" selection-end-column="0" />
+        <state relative-caret-position="3311">
+          <caret line="328" column="12" selection-start-line="328" selection-start-column="12" selection-end-line="328" selection-end-column="12" />
           <folding>
             <element signature="e#178#188#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/geometry.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3158">
+          <caret line="136" column="19" selection-start-line="136" selection-start-column="19" selection-end-line="136" selection-end-column="19" />
+          <folding />
         </state>
       </provider>
     </entry>

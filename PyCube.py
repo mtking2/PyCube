@@ -387,10 +387,7 @@ def draw_stickers():
             for vertex in surface:
                 glVertex3fv(edge_pieces[piece[0]][piece[1]][vertex])
 
-
-
     glEnd()
-
 
 
 def draw_axis():
