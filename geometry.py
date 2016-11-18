@@ -223,25 +223,55 @@ center_pieces = [
      [1, -3, -1]]
 ]
 
+# [axis, index]
 front_edges = [
-    [0, 1],  # x
-    [0, 3]   # y
-]
-
-back_edges = [
-    [2, 3],  # x
-    [1, 2]   # y
+    [0, 0],  # x
+    [0, 1],
+    [1, 0],  # y
+    [1, 3]
 ]
 
 left_edges = [
-    [0, 1],  # y
-    [0, 1]   # z
+    [1, 0],  # y
+    [1, 1],
+    [2, 0],  # z
+    [2, 1]
+]
+
+back_edges = [
+    [0, 2],  # x
+    [0, 3],
+    [1, 1],  # y
+    [1, 2]
 ]
 
 right_edges = [
-    [2, 3],  # y
-    [2, 3]   # z
+    [1, 2],  # y
+    [1, 3],
+    [2, 2],  # z
+    [2, 3]
 ]
+
+up_edges = [
+    [0, 1],  # x
+    [0, 2],
+    [2, 1],  # z
+    [2, 2]
+]
+
+down_edges = [
+    [0, 0],  # x
+    [0, 3],
+    [2, 0],  # z
+    [2, 3]
+]
+
+edges = [front_edges,
+         left_edges,
+         back_edges,
+         right_edges,
+         up_edges,
+         down_edges]
 
 
 '''

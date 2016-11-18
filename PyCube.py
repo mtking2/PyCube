@@ -5,6 +5,7 @@ Based and modified from original version found at:
 http://stackoverflow.com/questions/30745703/rotating-a-cube-using-quaternions-in-pyopengl
 """
 import sys
+import time
 from quat import *
 from geometry import *
 
@@ -13,6 +14,7 @@ from pygame.locals import *
 
 from OpenGL.GL import *
 from OpenGL.GLU import *
+from OpenGL.GLUT import *
 
 
 def main():
@@ -294,13 +296,14 @@ def main():
 
         update()
         sys.stdout.flush()
+        # time.sleep(5000)
 
 
 def draw_cube():
     glLineWidth(GLfloat(4.0))
     glBegin(GL_LINES)
-    # glColor3fv((0.0, 0.0, 0.0))
-    glColor3fv((0.5, 0.5, 0.5))
+    glColor3fv((0.0, 0.0, 0.0))
+    # glColor3fv((0.5, 0.5, 0.5))
 
     for axis in edge_pieces:
         for piece in axis:
@@ -318,50 +321,76 @@ def draw_cube():
 def draw_stickers():
     glBegin(GL_QUADS)
     i = 0
-    # for color, surface in zip(cube_colors, cube_surfaces):
-    #     glColor3fv(color)
-    #     for vertex in surface:
-    #         glVertex3fv(center_pieces[i][vertex])
-    #     j = 0
-    #     for piece in center_pieces:
-    #         glColor3fv((0, 0, 0))
-    #         for vertex in surface:
-    #             glVertex3fv(center_pieces[j][vertex])
-    #         j += 1
-    #     i += 1
+    for color, surface in zip(cube_colors, cube_surfaces):
+        glColor3fv(color)
+        for vertex in surface:
+            glVertex3fv(center_pieces[i][vertex])
+        j = 0
+        for piece in center_pieces:
+            glColor3fv((0, 0, 0))
+            for vertex in surface:
+                glVertex3fv(center_pieces[j][vertex])
+            j += 1
+        i += 1
 
     # Black inner sides of edge pieces
-    # glColor3fv((0, 0, 0))
-    # for piece in edge_pieces[0]:
-    #     for vertex in cube_surfaces[1]:
-    #         glVertex3fv(piece[vertex])
-    #     for vertex in cube_surfaces[3]:
-    #         glVertex3fv(piece[vertex])
-    #
-    # for piece in edge_pieces[1]:
-    #     for vertex in cube_surfaces[4]:
-    #         glVertex3fv(piece[vertex])
-    #     for vertex in cube_surfaces[5]:
-    #         glVertex3fv(piece[vertex])
-    #
-    # for piece in edge_pieces[2]:
-    #     for vertex in cube_surfaces[0]:
-    #         glVertex3fv(piece[vertex])
-    #     for vertex in cube_surfaces[2]:
-    #         glVertex3fv(piece[vertex])
+    glColor3fv((0, 0, 0))
+    for piece in edge_pieces[0]:
+        for vertex in cube_surfaces[1]:
+            glVertex3fv(piece[vertex])
+        for vertex in cube_surfaces[3]:
+            glVertex3fv(piece[vertex])
+
+    for piece in edge_pieces[1]:
+        for vertex in cube_surfaces[4]:
+            glVertex3fv(piece[vertex])
+        for vertex in cube_surfaces[5]:
+            glVertex3fv(piece[vertex])
+
+    for piece in edge_pieces[2]:
+        for vertex in cube_surfaces[0]:
+            glVertex3fv(piece[vertex])
+        for vertex in cube_surfaces[2]:
+            glVertex3fv(piece[vertex])
 
     # White front face
-    glColor3fv(cube_colors[0])
-    for vertex in edge_pieces[1][0]:
-            glVertex3fv(vertex)
-    for vertex in edge_pieces[1][3]:
-        glVertex3fv(vertex)
-    for vertex in edge_pieces[0][0]:
-        glVertex3fv(vertex)
-    for vertex in edge_pieces[0][1]:
-        glVertex3fv(vertex)
+    # glColor3fv(cube_colors[0])
+    # for vertex in cube_surfaces[0]:
+    #     glVertex3fv(edge_pieces[1][0][vertex])
+    #
+    # for vertex in cube_surfaces[0]:
+    #     glVertex3fv(edge_pieces[1][3][vertex])
+    #
+    # for vertex in cube_surfaces[0]:
+    #     glVertex3fv(edge_pieces[0][0][vertex])
+    #
+    # for vertex in cube_surfaces[0]:
+    #     glVertex3fv(edge_pieces[0][1][vertex])
+    #
+    # # red right face
+    # glColor3fv(cube_colors[1])
+    # for vertex in cube_surfaces[1]:
+    #     glVertex3fv(edge_pieces[1][0][vertex])
+    #
+    # for vertex in cube_surfaces[1]:
+    #     glVertex3fv(edge_pieces[1][1][vertex])
+    #
+    # for vertex in cube_surfaces[1]:
+    #     glVertex3fv(edge_pieces[2][0][vertex])
+    #
+    # for vertex in cube_surfaces[1]:
+    #     glVertex3fv(edge_pieces[2][1][vertex])
+
+    for color, surface, face in zip(cube_colors, cube_surfaces, edges):
+        glColor3fv(color)
+        for piece in face:
+            for vertex in surface:
+                glVertex3fv(edge_pieces[piece[0]][piece[1]][vertex])
+
+
 
     glEnd()
+
 
 
 def draw_axis():
