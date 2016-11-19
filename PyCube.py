@@ -26,15 +26,19 @@ class PyCube:
         pygame.display.set_mode((self.width, self.height), DOUBLEBUF | OPENGL)
         pygame.display.set_caption('PyCube')
 
+        # glClearColor(0.35, 0.35, 0.35, 1.0)
         glClearColor(1, 1, 1, 0)
         # Using depth test to make sure closer colors are shown over further ones
         glEnable(GL_DEPTH_TEST)
         glDepthFunc(GL_LESS)
+        glutInit()
+        # glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
         # Default view
         glMatrixMode(GL_PROJECTION)
         gluPerspective(45, (self.width / self.height), 0.5, 40)
         glTranslatef(0.0, 0.0, -17.5)
+        padding(0.3)
 
     def create_window(self, width, height):
         '''Updates the window width and height '''
@@ -48,6 +52,7 @@ class PyCube:
         # glRotate(90, 1, 0, 0)
         # glRotate(-15, 0, 0, 1)
         # glRotate(15, 1, 0, 0)
+        pad_toggle = False
 
         inc_x = 0
         inc_y = 0
@@ -73,7 +78,7 @@ class PyCube:
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 
             self.draw_cube()
-
+            glutSolidSphere(2.75, 50, 50);
             # draw_face()
             # self.draw_axis()
             pygame.display.flip()
@@ -83,10 +88,13 @@ class PyCube:
         #     print(v)
 
         while True:
-            theta = 0.13089969389957471827
-            theta_inc = 12
+            theta_inc = 8
+            theta = pi/2/theta_inc
+
+
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
+                    print()
                     pygame.quit()
                     quit()
                     # elif event.type == VIDEORESIZE:
@@ -304,6 +312,9 @@ class PyCube:
 
                             update()
 
+                    if event.key == pygame.K_e:
+                        pad_toggle = not pad_toggle
+
                     # Reset to default view
                     if event.key == pygame.K_SPACE:
                         inc_x = 0
@@ -323,16 +334,18 @@ class PyCube:
 
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     # Increase scale (zoom) value
-                    if event.button == 4:
-                        if zoom < 1.6:
+                    if event.button == 4 and zoom < 1.6 and not (pygame.key.get_mods() & KMOD_SHIFT):
                             zoom += 0.05
                             # print('scroll up', zoom)
-                if event.type == pygame.MOUSEBUTTONUP:
-                    # Increase scale (zoom) value
-                    if event.button == 5:
-                        if zoom > 0.3:
-                            zoom -= 0.05
+                    if event.button == 5 and zoom > 0.3 and not (pygame.key.get_mods() & KMOD_SHIFT):
+                        zoom -= 0.05
                             # print('scroll down', zoom)
+
+                    # change padding with [shift] mousewheel
+                    # if event.button == 5 and abs(center_pieces[0][0][2])>3.2 and pygame.key.get_mods() & KMOD_SHIFT:
+                    #     padding(-0.2)
+                    # if event.button == 4 and abs(center_pieces[0][0][2])<=6 and pygame.key.get_mods() & KMOD_SHIFT:
+                    #      padding(0.2)
 
             # Get relative movement of mouse coordinates and update x and y incs
             if pygame.mouse.get_pressed()[0] == 1:
@@ -341,14 +354,17 @@ class PyCube:
                 inc_x = -tmp_y * pi / 450
                 inc_y = -tmp_x * pi / 450
 
+            if pad_toggle and abs(center_pieces[0][0][2])<=6:
+                padding(0.3)
+            elif abs(center_pieces[0][0][2])>3.3 and not pad_toggle:
+                padding(-0.3)
+
             update()
             sys.stdout.flush()
             # time.sleep(5000)
 
-    pulse_color = [0.0, 0.0, 0.0]
-    pulse_val = 0.04
-
     def draw_cube(self):
+
         glLineWidth(GLfloat(6.0))
         glBegin(GL_LINES)
         # glColor3fv((1.0, 1.0, 1.0))
@@ -406,24 +422,38 @@ class PyCube:
                     glVertex3fv(edge_pieces[piece[0]][piece[1]][vertex])
 
         # Black inner sides of edge pieces
+        edge_black_pat = [
+            [0, 1, 2, 3, 4, 5],
+            [0, 1, 2, 3, 4, 5],
+            [0, 1, 2, 3, 4, 5]
+            # [4, 5],
+            # [0, 2]
+        ]
         glColor3fv((0, 0, 0))
-        for piece in edge_pieces[0]:
-            for vertex in cube_surfaces[1]:
-                glVertex3fv(piece[vertex])
-            for vertex in cube_surfaces[3]:
-                glVertex3fv(piece[vertex])
 
-        for piece in edge_pieces[1]:
-            for vertex in cube_surfaces[4]:
-                glVertex3fv(piece[vertex])
-            for vertex in cube_surfaces[5]:
-                glVertex3fv(piece[vertex])
+        for i in range(len(edge_black_pat)):
+            for face in edge_black_pat[i]:
+                for piece in edge_pieces[i]:
+                    for vertex in cube_surfaces[face]:
+                        glVertex3fv(piece[vertex])
 
-        for piece in edge_pieces[2]:
-            for vertex in cube_surfaces[0]:
-                glVertex3fv(piece[vertex])
-            for vertex in cube_surfaces[2]:
-                glVertex3fv(piece[vertex])
+        # for piece in edge_pieces[0]:
+        #     for vertex in cube_surfaces[1]:
+        #         glVertex3fv(piece[vertex])
+        #     for vertex in cube_surfaces[3]:
+        #         glVertex3fv(piece[vertex])
+        #
+        # for piece in edge_pieces[1]:
+        #     for vertex in cube_surfaces[4]:
+        #         glVertex3fv(piece[vertex])
+        #     for vertex in cube_surfaces[5]:
+        #         glVertex3fv(piece[vertex])
+        #
+        # for piece in edge_pieces[2]:
+        #     for vertex in cube_surfaces[0]:
+        #         glVertex3fv(piece[vertex])
+        #     for vertex in cube_surfaces[2]:
+        #         glVertex3fv(piece[vertex])
 
         corner_color_pat = [
             [0, 1, 5],  # 0
