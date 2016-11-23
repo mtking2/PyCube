@@ -1,4 +1,4 @@
-q# PyCube
+# PyCube
 
 PyCube is an 3D interactive Rubik's Cube using OpenGL and Pygame.
 
