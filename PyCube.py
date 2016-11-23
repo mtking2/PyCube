@@ -78,7 +78,7 @@ class PyCube:
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 
             self.draw_cube()
-            glutSolidSphere(2.75, 50, 50);
+            glutSolidSphere(3.0, 50, 50);
             # draw_face()
             # self.draw_axis()
             pygame.display.flip()
@@ -89,8 +89,7 @@ class PyCube:
 
         while True:
             theta_inc = 8
-            theta = pi/2/theta_inc
-
+            theta = pi / 2 / theta_inc
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -335,17 +334,17 @@ class PyCube:
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     # Increase scale (zoom) value
                     if event.button == 4 and zoom < 1.6 and not (pygame.key.get_mods() & KMOD_SHIFT):
-                            zoom += 0.05
-                            # print('scroll up', zoom)
+                        zoom += 0.05
+                        # print('scroll up', zoom)
                     if event.button == 5 and zoom > 0.3 and not (pygame.key.get_mods() & KMOD_SHIFT):
                         zoom -= 0.05
-                            # print('scroll down', zoom)
+                        # print('scroll down', zoom)
 
-                    # change padding with [shift] mousewheel
-                    # if event.button == 5 and abs(center_pieces[0][0][2])>3.2 and pygame.key.get_mods() & KMOD_SHIFT:
-                    #     padding(-0.2)
-                    # if event.button == 4 and abs(center_pieces[0][0][2])<=6 and pygame.key.get_mods() & KMOD_SHIFT:
-                    #      padding(0.2)
+                        # change padding with [shift] mousewheel
+                        # if event.button == 5 and abs(center_pieces[0][0][2])>3.2 and pygame.key.get_mods() & KMOD_SHIFT:
+                        #     padding(-0.2)
+                        # if event.button == 4 and abs(center_pieces[0][0][2])<=6 and pygame.key.get_mods() & KMOD_SHIFT:
+                        #      padding(0.2)
 
             # Get relative movement of mouse coordinates and update x and y incs
             if pygame.mouse.get_pressed()[0] == 1:
@@ -354,9 +353,9 @@ class PyCube:
                 inc_x = -tmp_y * pi / 450
                 inc_y = -tmp_x * pi / 450
 
-            if pad_toggle and abs(center_pieces[0][0][2])<=6:
+            if pad_toggle and abs(center_pieces[0][0][2]) <= 6:
                 padding(0.3)
-            elif abs(center_pieces[0][0][2])>3.3 and not pad_toggle:
+            elif abs(center_pieces[0][0][2]) > 3.3 and not pad_toggle:
                 padding(-0.3)
 
             update()
@@ -429,6 +428,7 @@ class PyCube:
             # [4, 5],
             # [0, 2]
         ]
+
         glColor3fv((0, 0, 0))
 
         for i in range(len(edge_black_pat)):
@@ -436,24 +436,6 @@ class PyCube:
                 for piece in edge_pieces[i]:
                     for vertex in cube_surfaces[face]:
                         glVertex3fv(piece[vertex])
-
-        # for piece in edge_pieces[0]:
-        #     for vertex in cube_surfaces[1]:
-        #         glVertex3fv(piece[vertex])
-        #     for vertex in cube_surfaces[3]:
-        #         glVertex3fv(piece[vertex])
-        #
-        # for piece in edge_pieces[1]:
-        #     for vertex in cube_surfaces[4]:
-        #         glVertex3fv(piece[vertex])
-        #     for vertex in cube_surfaces[5]:
-        #         glVertex3fv(piece[vertex])
-        #
-        # for piece in edge_pieces[2]:
-        #     for vertex in cube_surfaces[0]:
-        #         glVertex3fv(piece[vertex])
-        #     for vertex in cube_surfaces[2]:
-        #         glVertex3fv(piece[vertex])
 
         corner_color_pat = [
             [0, 1, 5],  # 0

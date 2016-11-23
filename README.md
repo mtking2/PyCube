@@ -1,4 +1,4 @@
-# PyCube
+q# PyCube
 
 PyCube is an 3D interactive Rubik's Cube using OpenGL and Pygame.
 
@@ -10,6 +10,9 @@ Progress as of 11/17/16.
 
 Progress as of 11/18/16.  
 <img src="resources/pycube_all.gif" width="400">
+
+Progress as of 11/23/16.  
+<img src="resources/pycube_all_exp.gif" width="400">
 
 ### Purpose
 This software-based Rubik's Cube will serve as a basis for a later
@@ -47,6 +50,7 @@ Only supported by Python 3.x+. Try at your own risk.
 * ~~Solve correct movement of corner pieces~~
 * ~~Color edge pieces~~
 * ~~Color corner pieces~~
+* ~~Visual tweaks~~
 * Test/bug fix cube
 * Test solves with PyCube
 * Begin implementing reverse moves solver
