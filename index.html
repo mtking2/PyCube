@@ -9,13 +9,14 @@
     <!-- link rel='stylesheet' type='text/css' href='index.css'/-->
 
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <!-- Optional theme -->
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"> -->
-    <!-- Latest compiled and minified JavaScript -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-submenu.min.css">
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../mtking2.github.io/css/custom.css">
+    <style>
+        time[title] { border-bottom: 1px dotted #333; }
+    </style>
 </head>
 
 
@@ -75,8 +76,6 @@
     <div class="container">
 
         <div class="row">
-            <!-- Blog Entries Column -->
-
 
             <div class="col-md-8">
                 <div class="well">
@@ -131,7 +130,36 @@
                     </p>
                 </div>
 
+                <!-- Blog Entries Column -->
+
                 <div class="well" id="nov16">
+                    <!-- Blog Post 4 -->
+                    <h2>
+                      It's Looking Good ;)
+                    </h2>
+                    <p class="lead">
+                        by <a href="../">Michael</a>
+                    </p>
+                    <p><span class="glyphicon glyphicon-time"></span> Posted <time class="timeago" datetime="Nov 23 2016 19:50">Nov 23, 2016 19:50</time></p>
+                    <hr>
+                    <p style="font-size:16px">
+                        So the cube itself is nearing completion. I have implemented the corner pieces and applied the
+                        appropriate algorithm in order to make them rotate correctly, as well as colored them. I also
+                        adjusted the appearance a bit. I spaced out the pieces to give a more realistic look. I put a
+                        sphere in the center to symbolize the central spherical gear that's used in an actual Rubik's
+                        Cube (the newer versions). Lastly I experimented with an exploded view that separates the pieces
+                        and exposed the inside of the cube. From here I'm going to begin work on a 'reverse moves'
+                        solver.
+                    </p>
+                    <hr>
+                    <div style="text-align: center;">
+                        <img src="resources/pycube_all.gif" alt="PyCube Gif" width="49%" />
+                        <img src="resources/pycube_all_exp.gif" alt="PyCube Gif" width="49%" />
+                    </div>
+
+                </div>
+
+                <div class="well">
                     <!-- Blog Post 3 -->
                     <h2>
                       Things are moving fast
@@ -139,12 +167,12 @@
                     <p class="lead">
                         by <a href="../">Michael</a>
                     </p>
-                    <p><span class="glyphicon glyphicon-time"></span> Posted on Nov 17, 2016</p>
+                    <p><span class="glyphicon glyphicon-time"></span> Posted <time class="timeago" datetime="Nov 17 2016">Nov 17, 2016</time></p>
                     <hr>
                     <p style="font-size:16px">
                         I'm swiftly making significant progress. I have implemented all of the edge pieces and have also
                         been able to make them rotate correctly with an algorithm that utilizes the rotation matrices.
-                        Correctly coloring each of the edge pieces and 'stickers' was an unforseen challange, but
+                        Correctly coloring each of the edge pieces and 'stickers' was an unforeseen challenge, but
                         luckily I was able to tackle that one. Now I will continue on to implement the corner pieces
                         which shouldn't be too hard considering they won't be much different from the edge pieces.
                     </p>
@@ -161,7 +189,7 @@
                     <p class="lead">
                         by <a href="../">Michael</a>
                     </p>
-                    <p><span class="glyphicon glyphicon-time"></span> Posted on Nov 16, 2016</p>
+                    <p><span class="glyphicon glyphicon-time"></span> Posted <time class="timeago" datetime="Nov 16 2016">Nov 16, 2016</time></p>
                     <hr>
                     <p style="font-size:16px">So over the summer I shelved PyCube until I started looking into graphics
                         with OpenGL. Seeing how the graphics can be so much better compared to VPython I decided to
@@ -185,11 +213,11 @@
                     <p class="lead">
                         by <a href="../">Michael</a>
                     </p>
-                    <p><span class="glyphicon glyphicon-time"></span> Posted on May 28, 2016</p>
+                    <p><span class="glyphicon glyphicon-time"></span> Posted <time class="timeago" datetime="May 28 2016">May 28, 2016</time></p>
                     <hr>
                     <p style="font-size:16px">
                         The first version of my Rubik's cube python program is finally alive. I still need to add a few
-                        more features and make a few tweeks but here it is!
+                        more features and make a few tweaks but here it is!
                     </p>
                     <a class="btn btn-primary" href="https://github.com/mtking2/VPython-Rubiks-Cube" target="_blank">
                         <i class="fa fa-github fa-lg" aria-hidden="true"></i>
@@ -325,14 +353,22 @@
         </div>
     </footer>
 
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
+    <script src="http://timeago.yarp.com/jquery.timeago.js" type="text/javascript"></script>
 
+    <script type="text/javascript">
+        jQuery(document).ready(function($){
+            $("time.timeago").timeago()
+        });
+    </script>
 
     <!-- Latest compiled and minified JavaScript -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap-submenu.min.js" defer></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="https://use.fontawesome.com/3f9a2d6486.js"></script>
+
+
 
 </body>
 
