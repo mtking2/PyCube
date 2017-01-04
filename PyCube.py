@@ -6,8 +6,12 @@ http://stackoverflow.com/questions/30745703/rotating-a-cube-using-quaternions-in
 """
 import sys
 import time
+import string
+import random
+import multiprocessing
 from quat import *
 from geometry import *
+import keypress
 
 import pygame
 from pygame.locals import *
@@ -16,6 +20,7 @@ from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
 
+moves = ''
 
 class PyCube:
     def __init__(self):
@@ -52,6 +57,10 @@ class PyCube:
         # glRotate(90, 1, 0, 0)
         # glRotate(-15, 0, 0, 1)
         # glRotate(15, 1, 0, 0)
+
+        global moves
+
+
         pad_toggle = False
 
         inc_x = 0
@@ -88,7 +97,7 @@ class PyCube:
         #     print(v)
 
         while True:
-            theta_inc = 8
+            theta_inc = 7
             theta = pi / 2 / theta_inc
 
             for event in pygame.event.get():
@@ -115,9 +124,11 @@ class PyCube:
 
                     if event.key == pygame.K_f:
                         if pygame.key.get_mods() & KMOD_SHIFT:
+                            moves += 'F'
                             sys.stdout.write("F\'")
                             theta *= 1
                         else:
+                            moves += 'f'
                             sys.stdout.write("F")
                             theta *= -1
                         for x in range(theta_inc):
@@ -148,9 +159,11 @@ class PyCube:
 
                     if event.key == pygame.K_l:
                         if pygame.key.get_mods() & KMOD_SHIFT:
+                            moves += 'L'
                             sys.stdout.write("L\'")
                             theta *= -1
                         else:
+                            moves += 'l'
                             sys.stdout.write("L")
                             theta *= 1
                         for x in range(theta_inc):
@@ -181,9 +194,11 @@ class PyCube:
 
                     if event.key == pygame.K_b:
                         if pygame.key.get_mods() & KMOD_SHIFT:
+                            moves += 'B'
                             sys.stdout.write("B\'")
                             theta *= -1
                         else:
+                            moves += 'b'
                             sys.stdout.write("B")
                             theta *= 1
                         for x in range(theta_inc):
@@ -214,9 +229,11 @@ class PyCube:
 
                     if event.key == pygame.K_r:
                         if pygame.key.get_mods() & KMOD_SHIFT:
+                            moves += 'R'
                             sys.stdout.write("R\'")
                             theta *= 1
                         else:
+                            moves += 'r'
                             sys.stdout.write("R")
                             theta *= -1
                         for x in range(theta_inc):
@@ -247,9 +264,11 @@ class PyCube:
 
                     if event.key == pygame.K_u:
                         if pygame.key.get_mods() & KMOD_SHIFT:
+                            moves += 'U'
                             sys.stdout.write("U\'")
                             theta *= 1
                         else:
+                            moves += 'u'
                             sys.stdout.write("U")
                             theta *= -1
                         for x in range(theta_inc):
@@ -280,9 +299,11 @@ class PyCube:
 
                     if event.key == pygame.K_d:
                         if pygame.key.get_mods() & KMOD_SHIFT:
+                            moves +='D'
                             sys.stdout.write("D\'")
                             theta *= -1
                         else:
+                            moves += 'd'
                             sys.stdout.write("D")
                             theta *= 1
                         for x in range(theta_inc):
@@ -320,6 +341,26 @@ class PyCube:
                         inc_y = 0
                         accum = (1, 0, 0, 0)
                         zoom = 1
+
+                    if event.key == pygame.K_EQUALS:
+                        p = multiprocessing.Process(target=keypress.wail, args=(moves,))
+                        # thread.daemon = True
+                        p.start()
+                        p.join()
+                        print()
+                        print(moves)
+                        moves = ''
+                        print(moves)
+
+
+                    if event.key == pygame.K_MINUS:
+                        mvs = 'fFbBlLrRuUdD'
+                        scrambled = ''.join(random.choice(mvs) for _ in range(20))
+                        p = multiprocessing.Process(target=self.scramble, args=(scrambled,))
+                        # p.daemon = True
+                        p.start()
+                        p.join()
+                        # self.scramble()
 
                 if event.type == pygame.KEYUP:
                     # Stoping rotation
@@ -361,6 +402,10 @@ class PyCube:
             update()
             sys.stdout.flush()
             # time.sleep(5000)
+
+    def scramble(self, scrambled):
+
+        keypress.wail(scrambled)
 
     def draw_cube(self):
 
@@ -483,4 +528,6 @@ class PyCube:
         glEnd()
 
 
-PyCube().run()
+if __name__ == "__main__":
+    cube = PyCube()
+    cube.run()
