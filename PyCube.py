@@ -11,7 +11,6 @@ import random
 import multiprocessing
 from quat import *
 from geometry import *
-import keypress
 
 import pygame
 from pygame.locals import *
@@ -343,24 +342,16 @@ class PyCube:
                         zoom = 1
 
                     if event.key == pygame.K_EQUALS:
-                        p = multiprocessing.Process(target=keypress.wail, args=(moves,))
-                        # thread.daemon = True
-                        p.start()
-                        p.join()
+                        self.scramble(moves)
                         print()
                         print(moves)
                         moves = ''
-                        print(moves)
 
 
                     if event.key == pygame.K_MINUS:
                         mvs = 'fFbBlLrRuUdD'
                         scrambled = ''.join(random.choice(mvs) for _ in range(20))
-                        p = multiprocessing.Process(target=self.scramble, args=(scrambled,))
-                        # p.daemon = True
-                        p.start()
-                        p.join()
-                        # self.scramble()
+                        self.scramble(scrambled)
 
                 if event.type == pygame.KEYUP:
                     # Stoping rotation
@@ -403,9 +394,12 @@ class PyCube:
             sys.stdout.flush()
             # time.sleep(5000)
 
-    def scramble(self, scrambled):
-
-        keypress.wail(scrambled)
+    def scramble(self, moves):    
+        if moves:
+            moves = list(reversed(list(moves.swapcase())))
+            for move in moves:
+                newevent = pygame.event.Event(pygame.locals.KEYDOWN, unicode=move, key=pygame.key.key_code(move), mod=pygame.locals.KMOD_NONE) 
+                pygame.event.post(newevent)         
 
     def draw_cube(self):
 
